@@ -1,0 +1,5 @@
+com.only4.web.config.CaptchaConfig
+com.only4.web.config.FilterConfig
+com.only4.web.config.I18nConfig
+com.only4.web.config.ResourcesConfig
+com.only4.web.config.UndertowConfig
