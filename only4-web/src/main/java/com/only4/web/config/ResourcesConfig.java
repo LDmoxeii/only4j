@@ -49,12 +49,4 @@ public class ResourcesConfig implements WebMvcConfigurer {
         // 返回新的CorsFilter
         return new CorsFilter(source);
     }
-
-    /**
-     * 全局异常处理器
-     */
-    @Bean
-    public GlobalExceptionHandler globalExceptionHandler() {
-        return new GlobalExceptionHandler();
-    }
 }

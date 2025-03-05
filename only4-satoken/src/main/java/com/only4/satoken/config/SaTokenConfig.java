@@ -43,12 +43,4 @@ public class SaTokenConfig {
         return new PlusSaTokenDao();
     }
 
-    /**
-     * 异常处理器
-     */
-    @Bean
-    public SaTokenExceptionHandler saTokenExceptionHandler() {
-        return new SaTokenExceptionHandler();
-    }
-
 }

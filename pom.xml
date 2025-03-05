@@ -20,6 +20,7 @@
         <module>only4-redis</module>
         <module>only4-satoken</module>
         <module>only4-web</module>
+        <module>only4-security</module>
         <module>only4-idempotent</module>
     </modules>
     <packaging>pom</packaging>

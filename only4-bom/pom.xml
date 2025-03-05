@@ -47,6 +47,11 @@
             </dependency>
             <dependency>
                 <groupId>com.only4</groupId>
+                <artifactId>only4-security</artifactId>
+                <version>1.2.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.only4</groupId>
                 <artifactId>only4-idempotent</artifactId>
                 <version>1.2.3</version>
             </dependency>
