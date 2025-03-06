@@ -303,7 +303,7 @@
                   "data": "@startuml\n\n@enduml\n"
                 },
                 {
-                 "type": "file",
+                  "type": "file",
                   "name": "view.puml",
                   "format": "raw",
                   "data": "@startuml\n!include ..\\lib_eventstorming.puml\n!if VIEW_COMMENT\n!define VIEW_QUERY\n\nComment(\"need\") [\n]\n!endif\n\n!include command.puml\n!include domain.puml\n!include event.puml\n!include relationCDE.puml\n\n!if VIEW_QUERY\n!include query.puml\n!endif\n@enduml\n"
@@ -884,3 +884,5 @@
         }
       ]
     }
+  ]
+}
