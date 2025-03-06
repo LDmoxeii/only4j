@@ -11,7 +11,7 @@ import java.io.Serial;
 /**
  * 无符号计算生成器
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 public class UnsignedMathGenerator implements CodeGenerator {
 

@@ -21,7 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * 权限安全配置
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 
 @Slf4j

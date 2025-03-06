@@ -1,6 +1,5 @@
 package com.only4.web.config;
 
-import com.only4.web.handler.GlobalExceptionHandler;
 import com.only4.web.interceptor.PlusWebInvokeTimeInterceptor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * 通用配置
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 @AutoConfiguration
 public class ResourcesConfig implements WebMvcConfigurer {

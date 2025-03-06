@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 /**
  * 获取所有Url配置
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 @Data
 public class AllUrlHandler implements InitializingBean {

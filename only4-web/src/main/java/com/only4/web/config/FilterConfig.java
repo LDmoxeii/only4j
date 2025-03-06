@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * Filter配置
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 @AutoConfiguration
 @EnableConfigurationProperties(XssProperties.class)

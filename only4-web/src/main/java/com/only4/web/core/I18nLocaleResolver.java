@@ -9,7 +9,7 @@ import java.util.Locale;
 /**
  * 获取请求头国际化信息
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 public class I18nLocaleResolver implements LocaleResolver {
 

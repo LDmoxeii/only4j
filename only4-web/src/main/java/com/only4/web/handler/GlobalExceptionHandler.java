@@ -35,7 +35,7 @@ import java.util.Set;
 /**
  * 全局异常处理器
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 @Slf4j
 @RestControllerAdvice

@@ -10,7 +10,6 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.only4.redis.config.properties.RedissonProperties;
 import com.only4.redis.handler.KeyPrefixHandler;
-import com.only4.redis.handler.RedisExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.client.codec.StringCodec;
 import org.redisson.codec.CompositeCodec;
@@ -20,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.task.VirtualThreadTaskExecutor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,7 +27,7 @@ import java.util.TimeZone;
 /**
  * redis配置
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 @Slf4j
 @AutoConfiguration

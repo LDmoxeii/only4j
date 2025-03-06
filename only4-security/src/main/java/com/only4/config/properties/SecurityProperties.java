@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * Security 配置属性
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 @Data
 @ConfigurationProperties(prefix = "security")

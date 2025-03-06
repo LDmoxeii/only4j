@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * 采用 caffeine + redis 多级缓存 优化并发查询效率
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 public class PlusSaTokenDao implements SaTokenDao {
 

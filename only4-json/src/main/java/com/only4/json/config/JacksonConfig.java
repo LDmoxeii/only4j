@@ -20,7 +20,7 @@ import java.util.TimeZone;
 /**
  * jackson 配置
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 @Slf4j
 @AutoConfiguration(before = JacksonAutoConfiguration.class)

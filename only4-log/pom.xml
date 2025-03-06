@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.only4</groupId>
+        <artifactId>only4j</artifactId>
+        <version>1.2.3</version>
+    </parent>
+    <artifactId>only4-log</artifactId>
+    <version>1.2.3</version>
+    <description>only4-log 日志模块</description>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.only4</groupId>
+            <artifactId>only4-satoken</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.only4</groupId>
+            <artifactId>only4-json</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+    </dependencies>
+</project>

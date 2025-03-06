@@ -7,7 +7,7 @@ import com.only4.common.entity.R;
 /**
  * web层通用数据处理
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 public class BaseController {
 

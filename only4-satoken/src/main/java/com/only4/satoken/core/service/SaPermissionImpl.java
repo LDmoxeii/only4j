@@ -1,19 +1,17 @@
 package com.only4.satoken.core.service;
 
 import cn.dev33.satoken.stp.StpInterface;
-import com.only4.common.entity.LoginUser;
 import com.only4.common.entity.Permission;
 import com.only4.common.entity.Role;
 import com.only4.satoken.utils.LoginHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * sa-token 权限管理实现类
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 public class SaPermissionImpl implements StpInterface {
 

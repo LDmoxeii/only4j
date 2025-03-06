@@ -15,7 +15,7 @@ import java.awt.*;
 /**
  * 验证码配置
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 @AutoConfiguration
 @EnableConfigurationProperties(CaptchaProperties.class)

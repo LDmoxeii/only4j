@@ -7,7 +7,6 @@ import cn.dev33.satoken.stp.StpLogic;
 import com.only4.satoken.core.dao.PlusSaTokenDao;
 import com.only4.satoken.core.service.SaPermissionImpl;
 import com.only4.satoken.factory.YmlPropertySourceFactory;
-import com.only4.satoken.handler.SaTokenExceptionHandler;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.PropertySource;
 /**
  * sa-token 配置
  *
- * @author Lion Li
+ * @author LD_moxeii
  */
 @AutoConfiguration
 @PropertySource(value = "classpath:common-satoken.yml", factory = YmlPropertySourceFactory.class)
