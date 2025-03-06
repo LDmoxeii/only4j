@@ -232,55 +232,115 @@
   "children": [
     {
       "type": "dir",
-      "name": "${artifactId}-adapter",
+      "name": "_design",
       "children": [
         {
-          "type": "file",
-          "name": "pom.xml",
-          "format": "raw",
-          "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>${groupId}</groupId>\n        <artifactId>${artifactId}</artifactId>\n        <version>${version}</version>\n    </parent>\n\n    <artifactId>${artifactId}-adapter</artifactId>\n\n    <dependencies>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-share</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-application</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n\n        <!-- spring boot web -->\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-actuator</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-validation</artifactId>\n        </dependency>\n\n        <!-- apollo客户端 -->\n        <dependency>\n            <groupId>com.ctrip.framework.apollo</groupId>\n            <artifactId>apollo-client</artifactId>\n            <version>${apollo.version}</version>\n        </dependency>\n        <!-- Xxl Job -->\n        <dependency>\n            <groupId>com.xuxueli</groupId>\n            <artifactId>xxl-job-core</artifactId>\n            <version>${xxljob.version}</version>\n        </dependency>\n        <!-- feign -->\n        <dependency>\n            <groupId>org.springframework.cloud</groupId>\n            <artifactId>spring-cloud-starter-openfeign</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>io.github.openfeign</groupId>\n            <artifactId>feign-okhttp</artifactId>\n            <version>11.10</version>\n        </dependency>\n        <!-- mybatis -->\n        <dependency>\n            <groupId>org.mybatis.spring.boot</groupId>\n            <artifactId>mybatis-spring-boot-starter</artifactId>\n            <version>${mybatis-starter.version}</version>\n        </dependency>\n        <!-- 数据库连接池 -->\n        <dependency>\n            <groupId>com.alibaba</groupId>\n            <artifactId>druid-spring-boot-starter</artifactId>\n            <version>${spring-boot-druid.version}</version>\n        </dependency>\n        <!-- mysql -->\n        <dependency>\n            <groupId>mysql</groupId>\n            <artifactId>mysql-connector-java</artifactId>\n            <version>${mysql-connector.version}</version>\n        </dependency>\n\n        <!--        &lt;!&ndash; Redis&ndash;&gt;-->\n        <!--        <dependency>-->\n        <!--            <groupId>org.springframework.boot</groupId>-->\n        <!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->\n        <!--        </dependency>-->\n        <!--        &lt;!&ndash; redis依赖commons-pool2 &ndash;&gt;-->\n        <!--        <dependency>-->\n        <!--            <groupId>org.apache.commons</groupId>-->\n        <!--            <artifactId>commons-pool2</artifactId>-->\n        <!--        </dependency>-->\n\n        <!--        &lt;!&ndash; es &ndash;&gt;-->\n        <!--        <dependency>-->\n        <!--            <groupId>org.springframework.boot</groupId>-->\n        <!--            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->\n        <!--        </dependency>-->\n\n        <dependency>\n            <groupId>com.only4</groupId>\n            <artifactId>only4-doc</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>com.only4</groupId>\n            <artifactId>only4-security</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>com.only4</groupId>\n            <artifactId>only4-web</artifactId>\n        </dependency>\n    </dependencies>\n\n</project>"
+          "type": "dir",
+          "name": "_domain",
+          "children": [
+            {
+              "type": "file",
+              "name": "lib_eventstorming.puml",
+              "format": "raw",
+              "data": "!global $ICON_FORMAT=\"png\"\n!global $TEXT_WIDTH_MAX=200\n!global $MSG_WIDTH_MAX=150\n!global $FONT_SIZE_XS=10\n!global $FONT_SIZE_SM=12\n!global $FONT_SIZE_MD=16\n!global $FONT_SIZE_LG=20\n!global $FONT_COLOR=\"#212121\"\n!global $FONT_COLOR_LIGHT=\"#757575\"\n\n!procedure EsEntity($shape, $stereotype, $id, $label=\"\")\n  !if ($label != \"\")\n    $shape \"$label\" as $id <<$stereotype>>\n  !else\n    $shape $id <<$stereotype>>\n  !endif\n!endprocedure\n\nshow stereotype\n\nskinparam defaultTextAlignment center\nskinparam wrapWidth 200\nskinparam maxMessageSize 150\n\nskinparam Arrow {\n    Color $FONT_COLOR\n    FontColor $FONT_COLOR\n    FontSize $FONT_SIZE_SM\n}\n\n\n' definition of the Item eventstorming/Element/FacadeCommand\nskinparam file<<FacadeCommand>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #779fae\n}\n\n!procedure FacadeCommand($id, $label=\"\")\n  EsEntity('file', 'FacadeCommand', $id, $label)\n!endprocedure\n' definition of the Item eventstorming/Element/Command\n\n\nskinparam file<<Command>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #aec6cf\n}\n\n!procedure Command($id, $label=\"\")\n  EsEntity('file', 'Command', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/Result\nskinparam file<<Result>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #cfcfc4\n}\n\n!procedure Result($id, $label=\"\")\n  EsEntity('file', 'Result', $id, $label)\n!endprocedure\n' definition of the Item eventstorming/Element/Event\n\n\nskinparam file<<Event>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #ffb853\n}\n\n!procedure Event($id, $label=\"\")\n  EsEntity('file', 'Event', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/DomainEvent\nskinparam file<<DomainEvent>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #ffcb81\n}\n\n!procedure DomainEvent($id, $label=\"\")\n  EsEntity('file', 'DomainEvent', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/IntegrationEvent\nskinparam file<<IntegrationEvent>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #ffdeaf\n}\n\n!procedure IntegrationEvent($id, $label=\"\")\n  EsEntity('file', 'IntegrationEvent', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/Query\nskinparam file<<Query>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #62d862\n}\n\n!procedure Query($id, $label=\"\")\n  EsEntity('file', 'Query', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/ReadModel\nskinparam file<<ReadModel>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #77dd77\n}\n\n!procedure ReadModel($id, $label=\"\")\n  EsEntity('file', 'ReadModel', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/UserInterface\nskinparam file<<UserInterface>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #a2e8a2\n}\n\n!procedure UserInterface($id, $label=\"\")\n  EsEntity('file', 'UserInterface', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/Aggregate\nskinparam file<<Aggregate>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #fdfd9d\n}\n\n!procedure Aggregate($id, $label=\"\")\n  EsEntity('file', 'Aggregate', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/Service\nskinparam file<<Service>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #fcfc78\n}\n\n!procedure Service($id, $label=\"\")\n  EsEntity('file', 'Service', $id, $label)\n!endprocedure\n' definition of the Item eventstorming/Element/Policy\n\n\nskinparam file<<Policy>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #b6a2db\n}\n\n!procedure Policy($id, $label=\"\")\n  EsEntity('file', 'Policy', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/Saga\nskinparam file<<Saga>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #c9bbe5\n}\n\n!procedure Saga($id, $label=\"\")\n  EsEntity('file', 'Saga', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/Process\nskinparam file<<Process>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #ddd4ee\n}\n\n!procedure Process($id, $label=\"\")\n  EsEntity('file', 'Process', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/Timer\nskinparam file<<Timer>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #cfcfc4\n}\n\n!procedure Timer($id, $label=\"\")\n  EsEntity('file', 'Timer', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/Person\nskinparam actor<<Person>> {\n    StereotypeFontSize 0\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #ffd1dc\n}\n\n!procedure Person($id, $label=\"\")\n  EsEntity('actor', 'Person', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/System\nskinparam file<<System>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor #ffd1dc\n}\n\n!procedure System($id, $label=\"\")\n  EsEntity('file', 'System', $id, $label)\n!endprocedure\n\n' definition of the Item eventstorming/Element/Comment\nskinparam file<<Comment>> {\n    StereotypeFontSize $FONT_SIZE_SM\n    shadowing false\n    FontColor $FONT_COLOR\n    BorderColor $FONT_COLOR\n    BackgroundColor transparent\n}\n\n!procedure Comment($id, $label=\"\")\n  EsEntity('file', 'Comment', $id, $label)\n!endprocedure"
+            },
+            {
+              "type": "file",
+              "name": "main.puml",
+              "format": "raw",
+              "data": "@startuml\n!define VIEW_COMMENT\n!define VIEW_QUERY\n\n!include relationEC.puml\n@enduml\n"
+            },
+            {
+              "type": "file",
+              "name": "relationEC.puml",
+              "format": "raw",
+              "data": "@startuml\n\n@enduml\n"
+            },
+            {
+              "type": "dir",
+              "name": "example",
+              "children": [
+                {
+                  "type": "file",
+                  "name": "_gen.txt",
+                  "format": "raw",
+                  "data": "cmd:example.example:命令例子\n\nqry:example.example:查询例子\n\nde:example.Example:example:领域事件例子"
+                },
+                {
+                  "type": "file",
+                  "name": "command.puml",
+                  "format": "raw",
+                  "data": "@startuml\n!include ..\\lib_eventstorming.puml\n\n@enduml\n"
+                },
+                {
+                  "type": "file",
+                  "name": "domain.puml",
+                  "format": "raw",
+                  "data": "@startuml\n!include ..\\lib_eventstorming.puml\n\n@enduml\n"
+                },
+                {
+                  "type": "file",
+                  "name": "event.puml",
+                  "format": "raw",
+                  "data": "@startuml\n!include ..\\lib_eventstorming.puml\n\n@enduml\n"
+                },
+                {
+                  "type": "file",
+                  "name": "query.puml",
+                  "format": "raw",
+                  "data": "@startuml\n!include ..\\lib_eventstorming.puml\n\n@enduml\n"
+                },
+                {
+                  "type": "file",
+                  "name": "relationCDE.puml",
+                  "format": "raw",
+                  "data": "@startuml\n\n@enduml\n"
+                },
+                {
+                  "type": "file",
+                  "name": "relationEC.puml",
+                  "format": "raw",
+                  "data": "@startuml\n\n@enduml\n"
+                },
+                {
+                 "type": "file",
+                  "name": "view.puml",
+                  "format": "raw",
+                  "data": "@startuml\n!include ..\\lib_eventstorming.puml\n!if VIEW_COMMENT\n!define VIEW_QUERY\n\nComment(\"need\") [\n]\n!endif\n\n!include command.puml\n!include domain.puml\n!include event.puml\n!include relationCDE.puml\n\n!if VIEW_QUERY\n!include query.puml\n!endif\n@enduml\n"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "dir",
-          "name": "src",
+          "name": "${artifactId}-adapter",
           "children": [
             {
+              "type": "file",
+              "name": "pom.xml",
+              "format": "raw",
+              "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>${groupId}</groupId>\n        <artifactId>${artifactId}</artifactId>\n        <version>${version}</version>\n    </parent>\n\n    <artifactId>${artifactId}-adapter</artifactId>\n\n    <dependencies>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-share</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-application</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n\n        <!-- spring boot web -->\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-actuator</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-validation</artifactId>\n        </dependency>\n\n        <!-- apollo客户端 -->\n        <dependency>\n            <groupId>com.ctrip.framework.apollo</groupId>\n            <artifactId>apollo-client</artifactId>\n            <version>${apollo.version}</version>\n        </dependency>\n        <!-- Xxl Job -->\n        <dependency>\n            <groupId>com.xuxueli</groupId>\n            <artifactId>xxl-job-core</artifactId>\n            <version>${xxljob.version}</version>\n        </dependency>\n        <!-- feign -->\n        <dependency>\n            <groupId>org.springframework.cloud</groupId>\n            <artifactId>spring-cloud-starter-openfeign</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>io.github.openfeign</groupId>\n            <artifactId>feign-okhttp</artifactId>\n            <version>11.10</version>\n        </dependency>\n        <!-- mybatis -->\n        <dependency>\n            <groupId>org.mybatis.spring.boot</groupId>\n            <artifactId>mybatis-spring-boot-starter</artifactId>\n            <version>${mybatis-starter.version}</version>\n        </dependency>\n        <!-- 数据库连接池 -->\n        <dependency>\n            <groupId>com.alibaba</groupId>\n            <artifactId>druid-spring-boot-starter</artifactId>\n            <version>${spring-boot-druid.version}</version>\n        </dependency>\n        <!-- mysql -->\n        <dependency>\n            <groupId>mysql</groupId>\n            <artifactId>mysql-connector-java</artifactId>\n            <version>${mysql-connector.version}</version>\n        </dependency>\n\n        <!--        &lt;!&ndash; Redis&ndash;&gt;-->\n        <!--        <dependency>-->\n        <!--            <groupId>org.springframework.boot</groupId>-->\n        <!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->\n        <!--        </dependency>-->\n        <!--        &lt;!&ndash; redis依赖commons-pool2 &ndash;&gt;-->\n        <!--        <dependency>-->\n        <!--            <groupId>org.apache.commons</groupId>-->\n        <!--            <artifactId>commons-pool2</artifactId>-->\n        <!--        </dependency>-->\n\n        <!--        &lt;!&ndash; es &ndash;&gt;-->\n        <!--        <dependency>-->\n        <!--            <groupId>org.springframework.boot</groupId>-->\n        <!--            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->\n        <!--        </dependency>-->\n\n        <dependency>\n            <groupId>com.only4</groupId>\n            <artifactId>only4-doc</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>com.only4</groupId>\n            <artifactId>only4-security</artifactId>\n        </dependency>\n        <dependency>\n            <groupId>com.only4</groupId>\n            <artifactId>only4-web</artifactId>\n        </dependency>\n    </dependencies>\n\n</project>"
+            },
+            {
               "type": "dir",
-              "name": "main",
+              "name": "src",
               "children": [
                 {
                   "type": "dir",
-                  "name": "java",
+                  "name": "main",
                   "children": [
                     {
                       "type": "dir",
-                      "name": "${basePackage}",
+                      "name": "java",
                       "children": [
                         {
                           "type": "dir",
-                          "name": "adapter",
+                          "name": "${basePackage}",
                           "children": [
                             {
                               "type": "dir",
-                              "name": "_share",
-                              "children": [
-                                {
-                                  "type": "dir",
-                                  "name": "configure",
-                                  "children": [
-                                    {
-                                      "type": "file",
-                                      "name": "ApolloConfig.java",
-                                      "format": "raw",
-                                      "data": "package ${basePackage}.adapter._share.configure;\n\nimport com.ctrip.framework.apollo.core.ConfigConsts;\nimport com.ctrip.framework.apollo.model.ConfigChangeEvent;\nimport com.ctrip.framework.apollo.spring.annotation.ApolloConfigChangeListener;\nimport lombok.AllArgsConstructor;\nimport lombok.extern.slf4j.Slf4j;\nimport org.springframework.boot.autoconfigure.condition.ConditionalOnClass;\nimport org.springframework.cloud.context.environment.EnvironmentChangeEvent;\nimport org.springframework.context.ApplicationEventPublisher;\nimport org.springframework.context.annotation.Configuration;\n\nimport java.util.Set;\n\n/**\n * Apollo配置\n * \n * @author bingking338\n */\n@Slf4j\n@Configuration\n@AllArgsConstructor\n@ConditionalOnClass(com.ctrip.framework.apollo.Apollo.class)\npublic class ApolloConfig {\n    private final ApplicationEventPublisher eventPublisher;\n\n    /**\n     * 自动更新环境变量\n     *\n     * @param changeEvent\n     */\n    @ApolloConfigChangeListener(ConfigConsts.NAMESPACE_APPLICATION)\n    public void onChange(ConfigChangeEvent changeEvent) {\n        Set<String> changedKeys = changeEvent.changedKeys();\n        log.info(\"Apollo Refreshing properties changedKeys:{}!\", changedKeys);\n        eventPublisher.publishEvent(new EnvironmentChangeEvent(changeEvent.changedKeys()));\n        log.info(\"Apollo Refreshing properties refreshed!\");\n    }\n\n}"
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "type": "dir",
-                              "name": "application",
+                              "name": "adapter",
                               "children": [
                                 {
                                   "type": "dir",
@@ -292,9 +352,9 @@
                                       "children": [
                                         {
                                           "type": "file",
-                                          "name": "MyIntegrationEventInterceptor.java",
+                                          "name": "ApolloConfig.java",
                                           "format": "raw",
-                                          "data": "package ${basePackage}.adapter.application._share.configure;\n\nimport org.netcorepal.cap4j.ddd.application.event.IntegrationEventInterceptor;\nimport org.netcorepal.cap4j.ddd.domain.event.EventRecord;\nimport org.springframework.stereotype.Service;\n\nimport java.time.LocalDateTime;\n\n/**\n * 集成事件拦截器\n *\n * @author cap4j-ddd-codegen\n * @date 2024/09/14\n */\n@Service\npublic class MyIntegrationEventInterceptor implements IntegrationEventInterceptor {\n\n    @Override\n    public void prePersist(EventRecord event) {\n\n    }\n\n    @Override\n    public void postPersist(EventRecord event) {\n\n    }\n\n    @Override\n    public void preRelease(EventRecord event) {\n\n    }\n\n    @Override\n    public void postRelease(EventRecord event) {\n\n    }\n\n    @Override\n    public void onException(Throwable throwable, EventRecord event) {\n\n    }\n\n    @Override\n    public void onAttach(Object eventPayload, LocalDateTime schedule) {\n\n    }\n\n    @Override\n    public void onDetach(Object eventPayload) {\n\n    }\n}\n"
+                                          "data": "package ${basePackage}.adapter._share.configure;\n\nimport com.ctrip.framework.apollo.core.ConfigConsts;\nimport com.ctrip.framework.apollo.model.ConfigChangeEvent;\nimport com.ctrip.framework.apollo.spring.annotation.ApolloConfigChangeListener;\nimport lombok.AllArgsConstructor;\nimport lombok.extern.slf4j.Slf4j;\nimport org.springframework.boot.autoconfigure.condition.ConditionalOnClass;\nimport org.springframework.cloud.context.environment.EnvironmentChangeEvent;\nimport org.springframework.context.ApplicationEventPublisher;\nimport org.springframework.context.annotation.Configuration;\n\nimport java.util.Set;\n\n/**\n * Apollo配置\n * \n * @author bingking338\n */\n@Slf4j\n@Configuration\n@AllArgsConstructor\n@ConditionalOnClass(com.ctrip.framework.apollo.Apollo.class)\npublic class ApolloConfig {\n    private final ApplicationEventPublisher eventPublisher;\n\n    /**\n     * 自动更新环境变量\n     *\n     * @param changeEvent\n     */\n    @ApolloConfigChangeListener(ConfigConsts.NAMESPACE_APPLICATION)\n    public void onChange(ConfigChangeEvent changeEvent) {\n        Set<String> changedKeys = changeEvent.changedKeys();\n        log.info(\"Apollo Refreshing properties changedKeys:{}!\", changedKeys);\n        eventPublisher.publishEvent(new EnvironmentChangeEvent(changeEvent.changedKeys()));\n        log.info(\"Apollo Refreshing properties refreshed!\");\n    }\n\n}"
                                         }
                                       ]
                                     }
@@ -302,117 +362,7 @@
                                 },
                                 {
                                   "type": "dir",
-                                  "name": "distributed",
-                                  "children": [
-                                    {
-                                      "type": "dir",
-                                      "name": "clients",
-                                      "tag": "client_handler"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "dir",
-                                  "name": "queries",
-                                  "tag": "query_handler"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "dir",
-                              "name": "domain",
-                              "children": [
-                                {
-                                  "type": "dir",
-                                  "name": "_share",
-                                  "children": [
-                                    {
-                                      "type": "dir",
-                                      "name": "configure",
-                                      "children": [
-                                        {
-                                          "type": "file",
-                                          "name": "MyDomainEventInterceptor.java",
-                                          "format": "raw",
-                                          "data": "package ${basePackage}.adapter.domain._share.configure;\n\nimport org.netcorepal.cap4j.ddd.domain.event.DomainEventInterceptor;\nimport org.netcorepal.cap4j.ddd.domain.event.EventRecord;\nimport org.springframework.stereotype.Service;\n\nimport java.time.LocalDateTime;\n\n/**\n * 领域事件拦截器\n *\n * @author cap4j-ddd-codegen\n * @date ${date}\n */\n@Service\npublic class MyDomainEventInterceptor implements DomainEventInterceptor {\n    @Override\n    public void onAttach(Object eventPayload, Object entity, LocalDateTime schedule) {\n\n    }\n\n    @Override\n    public void onDetach(Object eventPayload, Object entity) {\n\n    }\n\n    @Override\n    public void prePersist(EventRecord event) {\n\n    }\n\n    @Override\n    public void postPersist(EventRecord event) {\n\n    }\n\n    @Override\n    public void preRelease(EventRecord event) {\n\n    }\n\n    @Override\n    public void postRelease(EventRecord event) {\n\n    }\n\n    @Override\n    public void onException(Throwable throwable, EventRecord event) {\n\n    }\n}\n"
-                                        },
-                                        {
-                                          "type": "file",
-                                          "name": "MyEventMessageInterceptor.java",
-                                          "format": "raw",
-                                          "data": "package ${basePackage}.adapter.domain._share.configure;\n\nimport org.netcorepal.cap4j.ddd.domain.event.EventMessageInterceptor;\nimport org.springframework.messaging.Message;\nimport org.springframework.stereotype.Service;\n\n/**\n * 领域事件消息拦截器\n *\n * @author cap4j-ddd-codegen\n */\n@Service\npublic class MyEventMessageInterceptor implements EventMessageInterceptor {\n\n    @Override\n    public void initPublish(Message message) {\n\n    }\n\n    @Override\n    public void prePublish(Message message) {\n\n    }\n\n    @Override\n    public void postPublish(Message message) {\n\n    }\n\n    @Override\n    public void preSubscribe(Message message) {\n\n    }\n\n    @Override\n    public void postSubscribe(Message message) {\n\n    }\n}\n"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "dir",
-                                  "name": "repositories"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "dir",
-                              "name": "infra",
-                              "children": [
-                                {
-                                  "type": "dir",
-                                  "name": "_share"
-                                },
-                                {
-                                  "type": "dir",
-                                  "name": "jdbc",
-                                  "children": [
-                                    {
-                                      "type": "file",
-                                      "name": "NamedParameterJdbcTemplateDao.java",
-                                      "format": "raw",
-                                      "data": "package ${basePackage}.adapter.infra.jdbc;\n\nimport lombok.extern.slf4j.Slf4j;\nimport org.springframework.beans.BeanWrapper;\nimport org.springframework.beans.PropertyAccessorFactory;\nimport org.springframework.core.convert.TypeDescriptor;\nimport org.springframework.core.convert.converter.GenericConverter;\nimport org.springframework.core.convert.support.DefaultConversionService;\nimport org.springframework.jdbc.core.BeanPropertyRowMapper;\nimport org.springframework.jdbc.core.JdbcTemplate;\nimport org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;\nimport org.springframework.stereotype.Service;\n\nimport javax.persistence.AttributeConverter;\nimport javax.persistence.Convert;\nimport java.lang.reflect.Field;\nimport java.lang.reflect.InvocationTargetException;\nimport java.lang.reflect.Method;\nimport java.math.BigDecimal;\nimport java.time.LocalDate;\nimport java.time.LocalDateTime;\nimport java.time.LocalTime;\nimport java.util.*;\nimport java.util.regex.Matcher;\nimport java.util.regex.Pattern;\nimport java.util.stream.Collectors;\n\n/**\n * @author cap4j-ddd-codegen\n */\n@Slf4j\n@Service\npublic class NamedParameterJdbcTemplateDao {\n    private final JdbcTemplate jdbcTemplate;\n    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;\n\n    public NamedParameterJdbcTemplateDao(JdbcTemplate jdbcTemplate) {\n        this.jdbcTemplate = jdbcTemplate;\n        this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);\n    }\n\n    /**\n     * 查询一个实体，数据异常返回0或多条记录将会抛出异常\n     *\n     * @param entityClass\n     * @param sql\n     * @param paramBeans\n     * @param <E>\n     * @return\n     */\n    public <E> E queryOne(Class<E> entityClass, String sql, Object... paramBeans) {\n        Map<String, Object> params = resolveParamMap(paramBeans);\n        E result = null;\n        if (entityClass.isEnum()) {\n            Integer val = this.namedParameterJdbcTemplate.queryForObject(sql, params, Integer.class);\n            result = (E) EnumConvertUtil.getEnumFromCode(entityClass, val);\n        } else if (isPrimitiveType(entityClass)) {\n            result = this.namedParameterJdbcTemplate.queryForObject(sql, params, entityClass);\n        } else {\n            result = this.namedParameterJdbcTemplate.queryForObject(sql, params, generateRowMapper(entityClass));\n        }\n        return result;\n    }\n\n    /**\n     * 查询第一条实体记录\n     *\n     * @param entityClass\n     * @param sql\n     * @param paramBeans\n     * @param <E>\n     * @return\n     */\n    public <E> Optional<E> queryFirst(Class<E> entityClass, String sql, Object... paramBeans) {\n        Map<String, Object> params = resolveParamMap(paramBeans);\n        Pattern limitPattern = Pattern.compile(\"\\\\s+LIMIT\\\\s+\", Pattern.CASE_INSENSITIVE);\n        Matcher matcher = limitPattern.matcher(sql);\n        if (!matcher.find()) {\n            if (sql.trim().endsWith(\";\")) {\n                sql = sql.replaceFirst(\";\\\\s*$\", \" LIMIT 1;\");\n            } else {\n                sql += \" LIMIT 1;\";\n            }\n        }\n        List<E> result = null;\n        if (entityClass.isEnum()) {\n            result = this.namedParameterJdbcTemplate.queryForList(sql, params, Integer.class)\n                    .stream().map(i -> (E) EnumConvertUtil.getEnumFromCode(entityClass, i)).collect(Collectors.toList());\n        } else if (isPrimitiveType(entityClass)) {\n            result = this.namedParameterJdbcTemplate.queryForList(sql, params, entityClass);\n        } else {\n            result = this.namedParameterJdbcTemplate.query(sql, params, generateRowMapper(entityClass));\n        }\n        return result.stream().findFirst();\n    }\n\n    /**\n     * 查询实体列表\n     *\n     * @param entityClass\n     * @param sql\n     * @param paramBeans\n     * @param <E>\n     * @return\n     */\n    public <E> List<E> queryList(Class<E> entityClass, String sql, Object... paramBeans) {\n        Map<String, Object> params = resolveParamMap(paramBeans);\n        List<E> result = null;\n        if (entityClass.isEnum()) {\n            result = this.namedParameterJdbcTemplate.queryForList(sql, params, Integer.class)\n                    .stream().map(i -> (E) EnumConvertUtil.getEnumFromCode(entityClass, i)).collect(Collectors.toList());\n        } else if (isPrimitiveType(entityClass)) {\n            result = this.namedParameterJdbcTemplate.queryForList(sql, params, entityClass);\n        } else {\n            result = this.namedParameterJdbcTemplate.query(sql, params, generateRowMapper(entityClass));\n        }\n        return result;\n    }\n\n    /**\n     * 解析参数\n     *\n     * @param paramBeans\n     * @return\n     */\n    private Map<String, Object> resolveParamMap(Object... paramBeans) {\n        HashMap<String, Object> params = new HashMap<>();\n        for (Object paramBean : paramBeans) {\n            convertToPropertiesMap(params, paramBean);\n        }\n        return params;\n    }\n\n    /**\n     * 参数对象转Map\n     *\n     * @param resultMap\n     * @param object\n     * @param <T>\n     * @return\n     */\n    private static <T> Map<String, Object> convertToPropertiesMap(Map<String, Object> resultMap, T object) {\n        resultMap = resultMap == null\n                ? new HashMap<>()\n                : resultMap;\n\n        if (object == null) {\n            return resultMap;\n        }\n        if ((Map.class).isAssignableFrom(object.getClass())) {\n            resultMap.putAll((Map<String, ?>) object);\n        } else {\n            BeanWrapper wrapper = PropertyAccessorFactory.forBeanPropertyAccess(object);\n\n            for (Field propertyDescriptor : wrapper.getWrappedClass().getDeclaredFields()) {\n                String fieldName = propertyDescriptor.getName();\n\n                try {\n                    Object value = wrapper.getPropertyValue(fieldName);\n                    value = EnumConvertUtil.processWithJpaConverter(propertyDescriptor, value);\n                    value = EnumConvertUtil.processWithGetEnumCode(propertyDescriptor, value);\n                    resultMap.put(fieldName, value);\n                } catch (Exception e) {\n                    // 处理获取属性值时发生的异常\n                    log.error(\"命名参数转换异常 fieldName=\" + fieldName, e);\n                }\n            }\n        }\n\n        return resultMap;\n    }\n\n    /**\n     * 判断是否基础类型\n     *\n     * @param clazz\n     * @return\n     */\n    private static boolean isPrimitiveType(Class clazz) {\n        if (Long.class.equals(clazz)\n                || Integer.class.equals(clazz)\n                || Short.class.equals(clazz)\n                || Byte.class.equals(clazz)\n                || Float.class.equals(clazz)\n                || Double.class.equals(clazz)\n                || Boolean.class.equals(clazz)\n                || String.class.equals(clazz)\n                || BigDecimal.class.equals(clazz)\n                || Date.class.equals(clazz)\n                || LocalDateTime.class.equals(clazz)\n                || LocalDate.class.equals(clazz)\n                || LocalTime.class.equals(clazz)\n        ) {\n            return true;\n        }\n        return false;\n    }\n\n\n    private static Map<Class, BeanPropertyRowMapper> beanPropertyRowMapperMap = new HashMap<>();\n\n    /**\n     * 生成支持JpaConvert注解转化的RowMapper\n     *\n     * @param clazz\n     * @param <T>\n     * @return\n     */\n    private static <T> BeanPropertyRowMapper<T> generateRowMapper(Class<T> clazz) {\n        if (!beanPropertyRowMapperMap.containsKey(clazz)) {\n            DefaultConversionService conversionService = new DefaultConversionService();\n            BeanPropertyRowMapper beanPropertyRowMapper = BeanPropertyRowMapper.newInstance(clazz, conversionService);\n            for (Field propertyDescriptor : clazz.getDeclaredFields()) {\n                Convert convert = propertyDescriptor.getAnnotation(Convert.class);\n                if (convert != null && !convert.disableConversion()) {\n                    try {\n                        AttributeConverter converter = (AttributeConverter) convert.converter().newInstance();\n                        conversionService.addConverter(new JpaNumber2EnumConverter(Integer.class, propertyDescriptor.getType(), converter));\n                        conversionService.addConverter(new JpaNumber2EnumConverter(Long.class, propertyDescriptor.getType(), converter));\n                        conversionService.addConverter(new JpaNumber2EnumConverter(Short.class, propertyDescriptor.getType(), converter));\n                    } catch (InstantiationException e) {\n                        throw new RuntimeException(e);\n                    } catch (IllegalAccessException e) {\n                        throw new RuntimeException(e);\n                    }\n                } else if (propertyDescriptor.getType().isEnum()) {\n                    conversionService.addConverter(new GenericNumber2EnumConverter(Integer.class, propertyDescriptor.getType()));\n                    conversionService.addConverter(new GenericNumber2EnumConverter(Long.class, propertyDescriptor.getType()));\n                    conversionService.addConverter(new GenericNumber2EnumConverter(Short.class, propertyDescriptor.getType()));\n                }\n            }\n            beanPropertyRowMapperMap.put(clazz, beanPropertyRowMapper);\n        }\n        return beanPropertyRowMapperMap.get(clazz);\n    }\n\n    /**\n     * 枚举转化工具\n     */\n    private static class EnumConvertUtil {\n        private static final String ENUM_PERSIST_FIELD_METHOD = \"getCode\";\n\n        /**\n         * 反射读取枚举数字编码\n         *\n         * @param e\n         * @return\n         */\n        private static Object getEnumCode(Object e) {\n            Object code = null;\n            for (String fm : ENUM_PERSIST_FIELD_METHOD.split(\",\")) {\n                try {\n                    Method m = e.getClass().getMethod(fm);\n                    if (m != null) {\n                        code = m.invoke(e);\n                        break;\n                    }\n                } catch (IllegalAccessException ex) {\n                    throw new RuntimeException(ex);\n                } catch (InvocationTargetException ex) {\n                    throw new RuntimeException(ex);\n                } catch (NoSuchMethodException ex) {\n                    throw new RuntimeException(ex);\n                }\n            }\n            return code;\n        }\n\n        private static final Map<Class, Map<Object, Object>> CODE_ENUM_MAP_CACHE = new HashMap<>();\n\n        /**\n         * 数字编码转换成指定枚举类型\n         *\n         * @param enumClass\n         * @param val\n         * @return\n         */\n        private static Object getEnumFromCode(Class enumClass, Object val) {\n            if (!CODE_ENUM_MAP_CACHE.containsKey(enumClass)) {\n                Map<Object, Object> codeEnumMap = Arrays.stream(enumClass.getEnumConstants())\n                        .collect(Collectors.toMap(e -> getEnumCode(e), e -> e));\n                CODE_ENUM_MAP_CACHE.put(enumClass, codeEnumMap);\n            }\n            return CODE_ENUM_MAP_CACHE.get(enumClass).get(val);\n        }\n\n        /**\n         * 尝试JpaConvert注解转换枚举数字编码\n         *\n         * @param propertyDescriptor\n         * @param value\n         * @return\n         */\n        private static Object processWithJpaConverter(Field propertyDescriptor, Object value) {\n            Convert convert = propertyDescriptor.getAnnotation(Convert.class);\n            if (convert != null && !convert.disableConversion()) {\n                try {\n                    AttributeConverter converter = null;\n                    converter = (AttributeConverter) convert.converter().newInstance();\n                    return converter.convertToDatabaseColumn(value);\n                } catch (InstantiationException e) {\n                    throw new RuntimeException(e);\n                } catch (IllegalAccessException e) {\n                    throw new RuntimeException(e);\n                }\n            }\n            return value;\n        }\n\n        /**\n         * 尝试反射获取枚举数字编码\n         *\n         * @param propertyDescriptor\n         * @param value\n         * @return\n         */\n        private static Object processWithGetEnumCode(Field propertyDescriptor, Object value) {\n            if (value != null && value.getClass().isEnum()) {\n                return getEnumCode(value);\n            }\n            return value;\n        }\n    }\n\n    /**\n     * 基于JPA Convert注解的GenericConverter\n     */\n    private static class JpaNumber2EnumConverter implements GenericConverter {\n        Set<ConvertiblePair> set = new HashSet<>();\n        AttributeConverter attributeConverter;\n\n        public JpaNumber2EnumConverter(Class sourceType, Class targetType, AttributeConverter converter) {\n            set.add(new ConvertiblePair(sourceType, targetType));\n            this.attributeConverter = converter;\n        }\n\n        @Override\n        public Set<ConvertiblePair> getConvertibleTypes() {\n            return set;\n        }\n\n        @Override\n        public Object convert(Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {\n            return attributeConverter.convertToEntityAttribute(source);\n        }\n    }\n\n    /**\n     * 基于反射的GenericConverter\n     */\n    private static class GenericNumber2EnumConverter implements GenericConverter {\n\n        Set<ConvertiblePair> set = new HashSet<>();\n\n        public GenericNumber2EnumConverter(Class sourceType, Class targetType) {\n            set.add(new ConvertiblePair(sourceType, targetType));\n        }\n\n        @Override\n        public Set<ConvertiblePair> getConvertibleTypes() {\n            return set;\n        }\n\n        @Override\n        public Object convert(Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {\n            return EnumConvertUtil.getEnumFromCode(targetType.getType(), source);\n        }\n    }\n\n}\n"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "dir",
-                                  "name": "mybatis",
-                                  "children": [
-                                    {
-                                      "type": "dir",
-                                      "name": "_share",
-                                      "children": [
-                                        {
-                                          "type": "file",
-                                          "name": "MyEnumTypeHandler.java",
-                                          "format": "raw",
-                                          "data": "package ${basePackage}.adapter.infra.mybatis._share;\n\nimport org.apache.ibatis.type.BaseTypeHandler;\nimport org.apache.ibatis.type.JdbcType;\n\nimport java.lang.reflect.InvocationTargetException;\nimport java.lang.reflect.Method;\nimport java.sql.CallableStatement;\nimport java.sql.PreparedStatement;\nimport java.sql.ResultSet;\nimport java.sql.SQLException;\nimport java.util.Arrays;\nimport java.util.Map;\nimport java.util.stream.Collectors;\n\n/**\n * Mybatis枚举转化\n *\n * @author cap4j-ddd-codegen\n */\npublic class MyEnumTypeHandler <E extends Enum<E>> extends BaseTypeHandler<E> {\n    private static final String ENUM_PERSIST_FIELD_METHOD = \"getCode\";\n    private Integer getEnumCode(E e){\n        Integer code = 0;\n        for (String fm : ENUM_PERSIST_FIELD_METHOD.split(\",\")) {\n            try {\n                Method m = e.getClass().getMethod(fm);\n                if (m != null) {\n                    code = (Integer) m.invoke(e);\n                    break;\n                }\n            } catch (IllegalAccessException ex) {\n                throw new RuntimeException(ex);\n            } catch (InvocationTargetException ex) {\n                throw new RuntimeException(ex);\n            } catch (NoSuchMethodException ex) {\n                throw new RuntimeException(ex);\n            }\n        }\n        return code;\n    }\n\n    private Map<Integer, E> enums;\n\n    public MyEnumTypeHandler(Class<E> type) {\n        if (type == null) {\n            throw new IllegalArgumentException(\"Type argument cannot be null\");\n        } else {\n            this.enums = Arrays.stream(type.getEnumConstants()).collect(Collectors.toMap(e -> getEnumCode((E) e), e -> (E) e));\n            if (this.enums == null) {\n                throw new IllegalArgumentException(type.getSimpleName() + \" does not represent an enum type.\");\n            }\n        }\n    }\n\n    @Override\n    public void setNonNullParameter(PreparedStatement preparedStatement, int i, E e, JdbcType jdbcType) throws SQLException {\n        int val = getEnumCode(e);\n        preparedStatement.setInt(i, val);\n    }\n\n    @Override\n    public E getNullableResult(ResultSet resultSet, String s) throws SQLException {\n        int ordinal = resultSet.getInt(s);\n        return this.enums.get(ordinal);\n    }\n\n    @Override\n    public E getNullableResult(ResultSet resultSet, int i) throws SQLException {\n        int ordinal = resultSet.getInt(i);\n        return this.enums.get(ordinal);\n    }\n\n    @Override\n    public E getNullableResult(CallableStatement callableStatement, int i) throws SQLException {\n        int ordinal = callableStatement.getInt(i);\n        return this.enums.get(ordinal);\n    }\n}\n"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "dir",
-                                      "name": "mapper"
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "type": "dir",
-                              "name": "portal",
-                              "children": [
-                                {
-                                  "type": "dir",
-                                  "name": "api",
-                                  "children": [
-                                    {
-                                      "type": "dir",
-                                      "name": "_share"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "dir",
-                                  "name": "jobs",
+                                  "name": "application",
                                   "children": [
                                     {
                                       "type": "dir",
@@ -424,11 +374,105 @@
                                           "children": [
                                             {
                                               "type": "file",
-                                              "name": "XxlJobConfig.java",
+                                              "name": "MyIntegrationEventInterceptor.java",
                                               "format": "raw",
-                                              "data": "package ${basePackage}.adapter.portal.jobs._share.configure;\n\nimport com.xxl.job.core.executor.impl.XxlJobSpringExecutor;\nimport lombok.extern.slf4j.Slf4j;\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.boot.autoconfigure.condition.ConditionalOnClass;\nimport org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;\nimport org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.util.Assert;\n\n/**\n * xxljob-job config\n *\n * @author xuxueli 2017-04-28\n */\n@Slf4j\n@Configuration\n@ConditionalOnClass({XxlJobSpringExecutor.class})\n@ConditionalOnProperty(prefix = \"xxl.job\", value = {\"admin.addresses\", \"executor.appname\"})\npublic class XxlJobConfig {\n\n    /**\n     * 针对多网卡、容器内部署等情况，可借助 \"spring-cloud-commons\" 提供的 \"InetUtils\" 组件灵活定制注册IP；\n     *\n     *      1、引入依赖：\n     *          <dependency>\n     *             <groupId>org.springframework.cloud</groupId>\n     *             <artifactId>spring-cloud-commons</artifactId>\n     *             <version>${version}</version>\n     *         </dependency>\n     *\n     *      2、配置文件，或者容器启动变量\n     *          spring.cloud.inetutils.preferred-networks: 'xxx.xxx.xxx.'\n     *\n     *      3、获取IP\n     *          String ip_ = inetUtils.findFirstNonLoopbackHostInfo().getIpAddress();\n     */\n\n\n    @Value(\"${xxl.job.admin.addresses}\")\n    private String adminAddresses;\n\n    @Value(\"${xxl.job.accessToken}\")\n    private String accessToken;\n\n    @Value(\"${xxl.job.executor.appname}\")\n    private String appname;\n\n    @Value(\"${xxl.job.executor.address}\")\n    private String address;\n\n    @Value(\"${xxl.job.executor.ip}\")\n    private String ip;\n\n    @Value(\"${xxl.job.executor.port}\")\n    private int port;\n\n    @Value(\"${xxl.job.executor.logpath}\")\n    private String logPath;\n\n    @Value(\"${xxl.job.executor.logretentiondays}\")\n    private int logRetentionDays;\n\n\n    @Bean(initMethod = \"start\", destroyMethod = \"destroy\")\n    @ConditionalOnMissingBean(XxlJobSpringExecutor.class)\n    public XxlJobSpringExecutor xxlJobExecutor() {\n        Assert.hasText(adminAddresses, \"[xxljob.job.admin.addresses] must not be null\");\n        Assert.hasText(appname, \"[xxljob.job.executor.appname] must not be null\");\n        log.info(\">>>>>>>>>>> xxljob-job config init.\");\n        XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();\n        xxlJobSpringExecutor.setAdminAddresses(adminAddresses);\n        xxlJobSpringExecutor.setAppname(appname);\n        // xxlJobSpringExecutor.setAddress(address);\n        xxlJobSpringExecutor.setIp(ip);\n        xxlJobSpringExecutor.setPort(port);\n        xxlJobSpringExecutor.setAccessToken(accessToken);\n        xxlJobSpringExecutor.setLogPath(logPath);\n        xxlJobSpringExecutor.setLogRetentionDays(logRetentionDays);\n\n        return xxlJobSpringExecutor;\n    }\n}\n"
+                                              "data": "package ${basePackage}.adapter.application._share.configure;\n\nimport org.netcorepal.cap4j.ddd.application.event.IntegrationEventInterceptor;\nimport org.netcorepal.cap4j.ddd.domain.event.EventRecord;\nimport org.springframework.stereotype.Service;\n\nimport java.time.LocalDateTime;\n\n/**\n * 集成事件拦截器\n *\n * @author cap4j-ddd-codegen\n * @date 2024/09/14\n */\n@Service\npublic class MyIntegrationEventInterceptor implements IntegrationEventInterceptor {\n\n    @Override\n    public void prePersist(EventRecord event) {\n\n    }\n\n    @Override\n    public void postPersist(EventRecord event) {\n\n    }\n\n    @Override\n    public void preRelease(EventRecord event) {\n\n    }\n\n    @Override\n    public void postRelease(EventRecord event) {\n\n    }\n\n    @Override\n    public void onException(Throwable throwable, EventRecord event) {\n\n    }\n\n    @Override\n    public void onAttach(Object eventPayload, LocalDateTime schedule) {\n\n    }\n\n    @Override\n    public void onDetach(Object eventPayload) {\n\n    }\n}\n"
                                             }
                                           ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "dir",
+                                      "name": "distributed",
+                                      "children": [
+                                        {
+                                          "type": "dir",
+                                          "name": "clients",
+                                          "tag": "client_handler"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "dir",
+                                      "name": "queries",
+                                      "tag": "query_handler"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "dir",
+                                  "name": "domain",
+                                  "children": [
+                                    {
+                                      "type": "dir",
+                                      "name": "_share",
+                                      "children": [
+                                        {
+                                          "type": "dir",
+                                          "name": "configure",
+                                          "children": [
+                                            {
+                                              "type": "file",
+                                              "name": "MyDomainEventInterceptor.java",
+                                              "format": "raw",
+                                              "data": "package ${basePackage}.adapter.domain._share.configure;\n\nimport org.netcorepal.cap4j.ddd.domain.event.DomainEventInterceptor;\nimport org.netcorepal.cap4j.ddd.domain.event.EventRecord;\nimport org.springframework.stereotype.Service;\n\nimport java.time.LocalDateTime;\n\n/**\n * 领域事件拦截器\n *\n * @author cap4j-ddd-codegen\n * @date ${date}\n */\n@Service\npublic class MyDomainEventInterceptor implements DomainEventInterceptor {\n    @Override\n    public void onAttach(Object eventPayload, Object entity, LocalDateTime schedule) {\n\n    }\n\n    @Override\n    public void onDetach(Object eventPayload, Object entity) {\n\n    }\n\n    @Override\n    public void prePersist(EventRecord event) {\n\n    }\n\n    @Override\n    public void postPersist(EventRecord event) {\n\n    }\n\n    @Override\n    public void preRelease(EventRecord event) {\n\n    }\n\n    @Override\n    public void postRelease(EventRecord event) {\n\n    }\n\n    @Override\n    public void onException(Throwable throwable, EventRecord event) {\n\n    }\n}\n"
+                                            },
+                                            {
+                                              "type": "file",
+                                              "name": "MyEventMessageInterceptor.java",
+                                              "format": "raw",
+                                              "data": "package ${basePackage}.adapter.domain._share.configure;\n\nimport org.netcorepal.cap4j.ddd.domain.event.EventMessageInterceptor;\nimport org.springframework.messaging.Message;\nimport org.springframework.stereotype.Service;\n\n/**\n * 领域事件消息拦截器\n *\n * @author cap4j-ddd-codegen\n */\n@Service\npublic class MyEventMessageInterceptor implements EventMessageInterceptor {\n\n    @Override\n    public void initPublish(Message message) {\n\n    }\n\n    @Override\n    public void prePublish(Message message) {\n\n    }\n\n    @Override\n    public void postPublish(Message message) {\n\n    }\n\n    @Override\n    public void preSubscribe(Message message) {\n\n    }\n\n    @Override\n    public void postSubscribe(Message message) {\n\n    }\n}\n"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "dir",
+                                      "name": "repositories"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "dir",
+                                  "name": "infra",
+                                  "children": [
+                                    {
+                                      "type": "dir",
+                                      "name": "_share"
+                                    },
+                                    {
+                                      "type": "dir",
+                                      "name": "jdbc",
+                                      "children": [
+                                        {
+                                          "type": "file",
+                                          "name": "NamedParameterJdbcTemplateDao.java",
+                                          "format": "raw",
+                                          "data": "package ${basePackage}.adapter.infra.jdbc;\n\nimport lombok.extern.slf4j.Slf4j;\nimport org.springframework.beans.BeanWrapper;\nimport org.springframework.beans.PropertyAccessorFactory;\nimport org.springframework.core.convert.TypeDescriptor;\nimport org.springframework.core.convert.converter.GenericConverter;\nimport org.springframework.core.convert.support.DefaultConversionService;\nimport org.springframework.jdbc.core.BeanPropertyRowMapper;\nimport org.springframework.jdbc.core.JdbcTemplate;\nimport org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;\nimport org.springframework.stereotype.Service;\n\nimport javax.persistence.AttributeConverter;\nimport javax.persistence.Convert;\nimport java.lang.reflect.Field;\nimport java.lang.reflect.InvocationTargetException;\nimport java.lang.reflect.Method;\nimport java.math.BigDecimal;\nimport java.time.LocalDate;\nimport java.time.LocalDateTime;\nimport java.time.LocalTime;\nimport java.util.*;\nimport java.util.regex.Matcher;\nimport java.util.regex.Pattern;\nimport java.util.stream.Collectors;\n\n/**\n * @author cap4j-ddd-codegen\n */\n@Slf4j\n@Service\npublic class NamedParameterJdbcTemplateDao {\n    private final JdbcTemplate jdbcTemplate;\n    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;\n\n    public NamedParameterJdbcTemplateDao(JdbcTemplate jdbcTemplate) {\n        this.jdbcTemplate = jdbcTemplate;\n        this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);\n    }\n\n    /**\n     * 查询一个实体，数据异常返回0或多条记录将会抛出异常\n     *\n     * @param entityClass\n     * @param sql\n     * @param paramBeans\n     * @param <E>\n     * @return\n     */\n    public <E> E queryOne(Class<E> entityClass, String sql, Object... paramBeans) {\n        Map<String, Object> params = resolveParamMap(paramBeans);\n        E result = null;\n        if (entityClass.isEnum()) {\n            Integer val = this.namedParameterJdbcTemplate.queryForObject(sql, params, Integer.class);\n            result = (E) EnumConvertUtil.getEnumFromCode(entityClass, val);\n        } else if (isPrimitiveType(entityClass)) {\n            result = this.namedParameterJdbcTemplate.queryForObject(sql, params, entityClass);\n        } else {\n            result = this.namedParameterJdbcTemplate.queryForObject(sql, params, generateRowMapper(entityClass));\n        }\n        return result;\n    }\n\n    /**\n     * 查询第一条实体记录\n     *\n     * @param entityClass\n     * @param sql\n     * @param paramBeans\n     * @param <E>\n     * @return\n     */\n    public <E> Optional<E> queryFirst(Class<E> entityClass, String sql, Object... paramBeans) {\n        Map<String, Object> params = resolveParamMap(paramBeans);\n        Pattern limitPattern = Pattern.compile(\"\\\\s+LIMIT\\\\s+\", Pattern.CASE_INSENSITIVE);\n        Matcher matcher = limitPattern.matcher(sql);\n        if (!matcher.find()) {\n            if (sql.trim().endsWith(\";\")) {\n                sql = sql.replaceFirst(\";\\\\s*$\", \" LIMIT 1;\");\n            } else {\n                sql += \" LIMIT 1;\";\n            }\n        }\n        List<E> result = null;\n        if (entityClass.isEnum()) {\n            result = this.namedParameterJdbcTemplate.queryForList(sql, params, Integer.class)\n                    .stream().map(i -> (E) EnumConvertUtil.getEnumFromCode(entityClass, i)).collect(Collectors.toList());\n        } else if (isPrimitiveType(entityClass)) {\n            result = this.namedParameterJdbcTemplate.queryForList(sql, params, entityClass);\n        } else {\n            result = this.namedParameterJdbcTemplate.query(sql, params, generateRowMapper(entityClass));\n        }\n        return result.stream().findFirst();\n    }\n\n    /**\n     * 查询实体列表\n     *\n     * @param entityClass\n     * @param sql\n     * @param paramBeans\n     * @param <E>\n     * @return\n     */\n    public <E> List<E> queryList(Class<E> entityClass, String sql, Object... paramBeans) {\n        Map<String, Object> params = resolveParamMap(paramBeans);\n        List<E> result = null;\n        if (entityClass.isEnum()) {\n            result = this.namedParameterJdbcTemplate.queryForList(sql, params, Integer.class)\n                    .stream().map(i -> (E) EnumConvertUtil.getEnumFromCode(entityClass, i)).collect(Collectors.toList());\n        } else if (isPrimitiveType(entityClass)) {\n            result = this.namedParameterJdbcTemplate.queryForList(sql, params, entityClass);\n        } else {\n            result = this.namedParameterJdbcTemplate.query(sql, params, generateRowMapper(entityClass));\n        }\n        return result;\n    }\n\n    /**\n     * 解析参数\n     *\n     * @param paramBeans\n     * @return\n     */\n    private Map<String, Object> resolveParamMap(Object... paramBeans) {\n        HashMap<String, Object> params = new HashMap<>();\n        for (Object paramBean : paramBeans) {\n            convertToPropertiesMap(params, paramBean);\n        }\n        return params;\n    }\n\n    /**\n     * 参数对象转Map\n     *\n     * @param resultMap\n     * @param object\n     * @param <T>\n     * @return\n     */\n    private static <T> Map<String, Object> convertToPropertiesMap(Map<String, Object> resultMap, T object) {\n        resultMap = resultMap == null\n                ? new HashMap<>()\n                : resultMap;\n\n        if (object == null) {\n            return resultMap;\n        }\n        if ((Map.class).isAssignableFrom(object.getClass())) {\n            resultMap.putAll((Map<String, ?>) object);\n        } else {\n            BeanWrapper wrapper = PropertyAccessorFactory.forBeanPropertyAccess(object);\n\n            for (Field propertyDescriptor : wrapper.getWrappedClass().getDeclaredFields()) {\n                String fieldName = propertyDescriptor.getName();\n\n                try {\n                    Object value = wrapper.getPropertyValue(fieldName);\n                    value = EnumConvertUtil.processWithJpaConverter(propertyDescriptor, value);\n                    value = EnumConvertUtil.processWithGetEnumCode(propertyDescriptor, value);\n                    resultMap.put(fieldName, value);\n                } catch (Exception e) {\n                    // 处理获取属性值时发生的异常\n                    log.error(\"命名参数转换异常 fieldName=\" + fieldName, e);\n                }\n            }\n        }\n\n        return resultMap;\n    }\n\n    /**\n     * 判断是否基础类型\n     *\n     * @param clazz\n     * @return\n     */\n    private static boolean isPrimitiveType(Class clazz) {\n        if (Long.class.equals(clazz)\n                || Integer.class.equals(clazz)\n                || Short.class.equals(clazz)\n                || Byte.class.equals(clazz)\n                || Float.class.equals(clazz)\n                || Double.class.equals(clazz)\n                || Boolean.class.equals(clazz)\n                || String.class.equals(clazz)\n                || BigDecimal.class.equals(clazz)\n                || Date.class.equals(clazz)\n                || LocalDateTime.class.equals(clazz)\n                || LocalDate.class.equals(clazz)\n                || LocalTime.class.equals(clazz)\n        ) {\n            return true;\n        }\n        return false;\n    }\n\n\n    private static Map<Class, BeanPropertyRowMapper> beanPropertyRowMapperMap = new HashMap<>();\n\n    /**\n     * 生成支持JpaConvert注解转化的RowMapper\n     *\n     * @param clazz\n     * @param <T>\n     * @return\n     */\n    private static <T> BeanPropertyRowMapper<T> generateRowMapper(Class<T> clazz) {\n        if (!beanPropertyRowMapperMap.containsKey(clazz)) {\n            DefaultConversionService conversionService = new DefaultConversionService();\n            BeanPropertyRowMapper beanPropertyRowMapper = BeanPropertyRowMapper.newInstance(clazz, conversionService);\n            for (Field propertyDescriptor : clazz.getDeclaredFields()) {\n                Convert convert = propertyDescriptor.getAnnotation(Convert.class);\n                if (convert != null && !convert.disableConversion()) {\n                    try {\n                        AttributeConverter converter = (AttributeConverter) convert.converter().newInstance();\n                        conversionService.addConverter(new JpaNumber2EnumConverter(Integer.class, propertyDescriptor.getType(), converter));\n                        conversionService.addConverter(new JpaNumber2EnumConverter(Long.class, propertyDescriptor.getType(), converter));\n                        conversionService.addConverter(new JpaNumber2EnumConverter(Short.class, propertyDescriptor.getType(), converter));\n                    } catch (InstantiationException e) {\n                        throw new RuntimeException(e);\n                    } catch (IllegalAccessException e) {\n                        throw new RuntimeException(e);\n                    }\n                } else if (propertyDescriptor.getType().isEnum()) {\n                    conversionService.addConverter(new GenericNumber2EnumConverter(Integer.class, propertyDescriptor.getType()));\n                    conversionService.addConverter(new GenericNumber2EnumConverter(Long.class, propertyDescriptor.getType()));\n                    conversionService.addConverter(new GenericNumber2EnumConverter(Short.class, propertyDescriptor.getType()));\n                }\n            }\n            beanPropertyRowMapperMap.put(clazz, beanPropertyRowMapper);\n        }\n        return beanPropertyRowMapperMap.get(clazz);\n    }\n\n    /**\n     * 枚举转化工具\n     */\n    private static class EnumConvertUtil {\n        private static final String ENUM_PERSIST_FIELD_METHOD = \"getCode\";\n\n        /**\n         * 反射读取枚举数字编码\n         *\n         * @param e\n         * @return\n         */\n        private static Object getEnumCode(Object e) {\n            Object code = null;\n            for (String fm : ENUM_PERSIST_FIELD_METHOD.split(\",\")) {\n                try {\n                    Method m = e.getClass().getMethod(fm);\n                    if (m != null) {\n                        code = m.invoke(e);\n                        break;\n                    }\n                } catch (IllegalAccessException ex) {\n                    throw new RuntimeException(ex);\n                } catch (InvocationTargetException ex) {\n                    throw new RuntimeException(ex);\n                } catch (NoSuchMethodException ex) {\n                    throw new RuntimeException(ex);\n                }\n            }\n            return code;\n        }\n\n        private static final Map<Class, Map<Object, Object>> CODE_ENUM_MAP_CACHE = new HashMap<>();\n\n        /**\n         * 数字编码转换成指定枚举类型\n         *\n         * @param enumClass\n         * @param val\n         * @return\n         */\n        private static Object getEnumFromCode(Class enumClass, Object val) {\n            if (!CODE_ENUM_MAP_CACHE.containsKey(enumClass)) {\n                Map<Object, Object> codeEnumMap = Arrays.stream(enumClass.getEnumConstants())\n                        .collect(Collectors.toMap(e -> getEnumCode(e), e -> e));\n                CODE_ENUM_MAP_CACHE.put(enumClass, codeEnumMap);\n            }\n            return CODE_ENUM_MAP_CACHE.get(enumClass).get(val);\n        }\n\n        /**\n         * 尝试JpaConvert注解转换枚举数字编码\n         *\n         * @param propertyDescriptor\n         * @param value\n         * @return\n         */\n        private static Object processWithJpaConverter(Field propertyDescriptor, Object value) {\n            Convert convert = propertyDescriptor.getAnnotation(Convert.class);\n            if (convert != null && !convert.disableConversion()) {\n                try {\n                    AttributeConverter converter = null;\n                    converter = (AttributeConverter) convert.converter().newInstance();\n                    return converter.convertToDatabaseColumn(value);\n                } catch (InstantiationException e) {\n                    throw new RuntimeException(e);\n                } catch (IllegalAccessException e) {\n                    throw new RuntimeException(e);\n                }\n            }\n            return value;\n        }\n\n        /**\n         * 尝试反射获取枚举数字编码\n         *\n         * @param propertyDescriptor\n         * @param value\n         * @return\n         */\n        private static Object processWithGetEnumCode(Field propertyDescriptor, Object value) {\n            if (value != null && value.getClass().isEnum()) {\n                return getEnumCode(value);\n            }\n            return value;\n        }\n    }\n\n    /**\n     * 基于JPA Convert注解的GenericConverter\n     */\n    private static class JpaNumber2EnumConverter implements GenericConverter {\n        Set<ConvertiblePair> set = new HashSet<>();\n        AttributeConverter attributeConverter;\n\n        public JpaNumber2EnumConverter(Class sourceType, Class targetType, AttributeConverter converter) {\n            set.add(new ConvertiblePair(sourceType, targetType));\n            this.attributeConverter = converter;\n        }\n\n        @Override\n        public Set<ConvertiblePair> getConvertibleTypes() {\n            return set;\n        }\n\n        @Override\n        public Object convert(Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {\n            return attributeConverter.convertToEntityAttribute(source);\n        }\n    }\n\n    /**\n     * 基于反射的GenericConverter\n     */\n    private static class GenericNumber2EnumConverter implements GenericConverter {\n\n        Set<ConvertiblePair> set = new HashSet<>();\n\n        public GenericNumber2EnumConverter(Class sourceType, Class targetType) {\n            set.add(new ConvertiblePair(sourceType, targetType));\n        }\n\n        @Override\n        public Set<ConvertiblePair> getConvertibleTypes() {\n            return set;\n        }\n\n        @Override\n        public Object convert(Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {\n            return EnumConvertUtil.getEnumFromCode(targetType.getType(), source);\n        }\n    }\n\n}\n"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "dir",
+                                      "name": "mybatis",
+                                      "children": [
+                                        {
+                                          "type": "dir",
+                                          "name": "_share",
+                                          "children": [
+                                            {
+                                              "type": "file",
+                                              "name": "MyEnumTypeHandler.java",
+                                              "format": "raw",
+                                              "data": "package ${basePackage}.adapter.infra.mybatis._share;\n\nimport org.apache.ibatis.type.BaseTypeHandler;\nimport org.apache.ibatis.type.JdbcType;\n\nimport java.lang.reflect.InvocationTargetException;\nimport java.lang.reflect.Method;\nimport java.sql.CallableStatement;\nimport java.sql.PreparedStatement;\nimport java.sql.ResultSet;\nimport java.sql.SQLException;\nimport java.util.Arrays;\nimport java.util.Map;\nimport java.util.stream.Collectors;\n\n/**\n * Mybatis枚举转化\n *\n * @author cap4j-ddd-codegen\n */\npublic class MyEnumTypeHandler <E extends Enum<E>> extends BaseTypeHandler<E> {\n    private static final String ENUM_PERSIST_FIELD_METHOD = \"getCode\";\n    private Integer getEnumCode(E e){\n        Integer code = 0;\n        for (String fm : ENUM_PERSIST_FIELD_METHOD.split(\",\")) {\n            try {\n                Method m = e.getClass().getMethod(fm);\n                if (m != null) {\n                    code = (Integer) m.invoke(e);\n                    break;\n                }\n            } catch (IllegalAccessException ex) {\n                throw new RuntimeException(ex);\n            } catch (InvocationTargetException ex) {\n                throw new RuntimeException(ex);\n            } catch (NoSuchMethodException ex) {\n                throw new RuntimeException(ex);\n            }\n        }\n        return code;\n    }\n\n    private Map<Integer, E> enums;\n\n    public MyEnumTypeHandler(Class<E> type) {\n        if (type == null) {\n            throw new IllegalArgumentException(\"Type argument cannot be null\");\n        } else {\n            this.enums = Arrays.stream(type.getEnumConstants()).collect(Collectors.toMap(e -> getEnumCode((E) e), e -> (E) e));\n            if (this.enums == null) {\n                throw new IllegalArgumentException(type.getSimpleName() + \" does not represent an enum type.\");\n            }\n        }\n    }\n\n    @Override\n    public void setNonNullParameter(PreparedStatement preparedStatement, int i, E e, JdbcType jdbcType) throws SQLException {\n        int val = getEnumCode(e);\n        preparedStatement.setInt(i, val);\n    }\n\n    @Override\n    public E getNullableResult(ResultSet resultSet, String s) throws SQLException {\n        int ordinal = resultSet.getInt(s);\n        return this.enums.get(ordinal);\n    }\n\n    @Override\n    public E getNullableResult(ResultSet resultSet, int i) throws SQLException {\n        int ordinal = resultSet.getInt(i);\n        return this.enums.get(ordinal);\n    }\n\n    @Override\n    public E getNullableResult(CallableStatement callableStatement, int i) throws SQLException {\n        int ordinal = callableStatement.getInt(i);\n        return this.enums.get(ordinal);\n    }\n}\n"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "dir",
+                                          "name": "mapper"
                                         }
                                       ]
                                     }
@@ -436,11 +480,61 @@
                                 },
                                 {
                                   "type": "dir",
-                                  "name": "queues"
+                                  "name": "portal",
+                                  "children": [
+                                    {
+                                      "type": "dir",
+                                      "name": "api",
+                                      "children": [
+                                        {
+                                          "type": "dir",
+                                          "name": "_share"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "dir",
+                                      "name": "jobs",
+                                      "children": [
+                                        {
+                                          "type": "dir",
+                                          "name": "_share",
+                                          "children": [
+                                            {
+                                              "type": "dir",
+                                              "name": "configure",
+                                              "children": [
+                                                {
+                                                  "type": "file",
+                                                  "name": "XxlJobConfig.java",
+                                                  "format": "raw",
+                                                  "data": "package ${basePackage}.adapter.portal.jobs._share.configure;\n\nimport com.xxl.job.core.executor.impl.XxlJobSpringExecutor;\nimport lombok.extern.slf4j.Slf4j;\nimport org.springframework.beans.factory.annotation.Value;\nimport org.springframework.boot.autoconfigure.condition.ConditionalOnClass;\nimport org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;\nimport org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.util.Assert;\n\n/**\n * xxljob-job config\n *\n * @author xuxueli 2017-04-28\n */\n@Slf4j\n@Configuration\n@ConditionalOnClass({XxlJobSpringExecutor.class})\n@ConditionalOnProperty(prefix = \"xxl.job\", value = {\"admin.addresses\", \"executor.appname\"})\npublic class XxlJobConfig {\n\n    /**\n     * 针对多网卡、容器内部署等情况，可借助 \"spring-cloud-commons\" 提供的 \"InetUtils\" 组件灵活定制注册IP；\n     *\n     *      1、引入依赖：\n     *          <dependency>\n     *             <groupId>org.springframework.cloud</groupId>\n     *             <artifactId>spring-cloud-commons</artifactId>\n     *             <version>${version}</version>\n     *         </dependency>\n     *\n     *      2、配置文件，或者容器启动变量\n     *          spring.cloud.inetutils.preferred-networks: 'xxx.xxx.xxx.'\n     *\n     *      3、获取IP\n     *          String ip_ = inetUtils.findFirstNonLoopbackHostInfo().getIpAddress();\n     */\n\n\n    @Value(\"${xxl.job.admin.addresses}\")\n    private String adminAddresses;\n\n    @Value(\"${xxl.job.accessToken}\")\n    private String accessToken;\n\n    @Value(\"${xxl.job.executor.appname}\")\n    private String appname;\n\n    @Value(\"${xxl.job.executor.address}\")\n    private String address;\n\n    @Value(\"${xxl.job.executor.ip}\")\n    private String ip;\n\n    @Value(\"${xxl.job.executor.port}\")\n    private int port;\n\n    @Value(\"${xxl.job.executor.logpath}\")\n    private String logPath;\n\n    @Value(\"${xxl.job.executor.logretentiondays}\")\n    private int logRetentionDays;\n\n\n    @Bean(initMethod = \"start\", destroyMethod = \"destroy\")\n    @ConditionalOnMissingBean(XxlJobSpringExecutor.class)\n    public XxlJobSpringExecutor xxlJobExecutor() {\n        Assert.hasText(adminAddresses, \"[xxljob.job.admin.addresses] must not be null\");\n        Assert.hasText(appname, \"[xxljob.job.executor.appname] must not be null\");\n        log.info(\">>>>>>>>>>> xxljob-job config init.\");\n        XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();\n        xxlJobSpringExecutor.setAdminAddresses(adminAddresses);\n        xxlJobSpringExecutor.setAppname(appname);\n        // xxlJobSpringExecutor.setAddress(address);\n        xxlJobSpringExecutor.setIp(ip);\n        xxlJobSpringExecutor.setPort(port);\n        xxlJobSpringExecutor.setAccessToken(accessToken);\n        xxlJobSpringExecutor.setLogPath(logPath);\n        xxlJobSpringExecutor.setLogRetentionDays(logRetentionDays);\n\n        return xxlJobSpringExecutor;\n    }\n}\n"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "dir",
+                                      "name": "queues"
+                                    }
+                                  ]
                                 }
                               ]
                             }
                           ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "dir",
+                      "name": "resources",
+                      "children": [
+                        {
+                          "type": "dir",
+                          "name": "mapper"
                         }
                       ]
                     }
@@ -448,243 +542,308 @@
                 },
                 {
                   "type": "dir",
-                  "name": "resources",
+                  "name": "test",
                   "children": [
                     {
                       "type": "dir",
-                      "name": "mapper"
+                      "name": "java"
                     }
                   ]
                 }
               ]
-            },
-            {
-              "type": "dir",
-              "name": "test",
-              "children": [
-                {
-                  "type": "dir",
-                  "name": "java"
-                }
-              ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "type": "dir",
-      "name": "${artifactId}-application",
-      "children": [
-        {
-          "type": "file",
-          "name": "pom.xml",
-          "format": "raw",
-          "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>${groupId}</groupId>\n        <artifactId>${artifactId}</artifactId>\n        <version>${version}</version>\n    </parent>\n\n    <artifactId>${artifactId}-application</artifactId>\n\n    <dependencies>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-share</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-domain</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n    </dependencies>\n\n</project>"
         },
         {
           "type": "dir",
-          "name": "src",
+          "name": "${artifactId}-application",
           "children": [
             {
+              "type": "file",
+              "name": "pom.xml",
+              "format": "raw",
+              "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>${groupId}</groupId>\n        <artifactId>${artifactId}</artifactId>\n        <version>${version}</version>\n    </parent>\n\n    <artifactId>${artifactId}-application</artifactId>\n\n    <dependencies>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-share</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-domain</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n    </dependencies>\n\n</project>"
+            },
+            {
               "type": "dir",
-              "name": "main",
+              "name": "src",
               "children": [
                 {
                   "type": "dir",
-                  "name": "java",
+                  "name": "main",
                   "children": [
                     {
                       "type": "dir",
-                      "name": "${basePackage}",
+                      "name": "java",
                       "children": [
                         {
                           "type": "dir",
-                          "name": "application",
+                          "name": "${basePackage}",
                           "children": [
                             {
                               "type": "dir",
-                              "name": "_share",
+                              "name": "application",
                               "children": [
                                 {
                                   "type": "dir",
-                                  "name": "enums"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "dir",
-                              "name": "commands",
-                              "tag": "command"
-                            },
-                            {
-                              "type": "dir",
-                              "name": "distributed",
-                              "children": [
-                                {
-                                  "type": "dir",
-                                  "name": "clients",
-                                  "tag": "client"
+                                  "name": "_share",
+                                  "children": [
+                                    {
+                                      "type": "dir",
+                                      "name": "enums"
+                                    }
+                                  ]
                                 },
                                 {
                                   "type": "dir",
-                                  "name": "events",
-                                  "tag": "integration_event"
+                                  "name": "commands",
+                                  "tag": "command"
                                 },
                                 {
                                   "type": "dir",
-                                  "name": "sagas"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "dir",
-                              "name": "queries",
-                              "tag": "query"
-                            },
-                            {
-                              "type": "dir",
-                              "name": "subscribers",
-                              "children": [
-                                {
-                                  "type": "dir",
-                                  "name": "domain",
-                                  "tag": "domain_event_handler"
+                                  "name": "distributed",
+                                  "children": [
+                                    {
+                                      "type": "dir",
+                                      "name": "clients",
+                                      "tag": "client"
+                                    },
+                                    {
+                                      "type": "dir",
+                                      "name": "events",
+                                      "tag": "integration_event"
+                                    },
+                                    {
+                                      "type": "dir",
+                                      "name": "sagas"
+                                    }
+                                  ]
                                 },
                                 {
                                   "type": "dir",
-                                  "name": "integration",
-                                  "tag": "integration_event_handler"
+                                  "name": "queries",
+                                  "tag": "query"
+                                },
+                                {
+                                  "type": "dir",
+                                  "name": "subscribers",
+                                  "children": [
+                                    {
+                                      "type": "dir",
+                                      "name": "domain",
+                                      "tag": "domain_event_handler"
+                                    },
+                                    {
+                                      "type": "dir",
+                                      "name": "integration",
+                                      "tag": "integration_event_handler"
+                                    }
+                                  ]
                                 }
                               ]
                             }
                           ]
                         }
                       ]
+                    },
+                    {
+                      "type": "dir",
+                      "name": "resources",
+                      "children": []
                     }
                   ]
                 },
                 {
                   "type": "dir",
-                  "name": "resources",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "type": "dir",
-              "name": "test",
-              "children": [
-                {
-                  "type": "dir",
-                  "name": "java"
+                  "name": "test",
+                  "children": [
+                    {
+                      "type": "dir",
+                      "name": "java"
+                    }
+                  ]
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "type": "dir",
-      "name": "${artifactId}-domain",
-      "children": [
-        {
-          "type": "file",
-          "name": "pom.xml",
-          "format": "raw",
-          "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>${groupId}</groupId>\n        <artifactId>${artifactId}</artifactId>\n        <version>${version}</version>\n    </parent>\n\n    <artifactId>${artifactId}-domain</artifactId>\n\n    <dependencies>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-share</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>io.github.netcorepal</groupId>\n            <artifactId>cap4j-ddd-starter</artifactId>\n            <version>${cap4j.version}</version>\n        </dependency>\n        <!-- JPA -->\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\n        </dependency>\n    </dependencies>\n\n</project>"
         },
         {
           "type": "dir",
-          "name": "src",
+          "name": "${artifactId}-domain",
           "children": [
             {
+              "type": "file",
+              "name": "pom.xml",
+              "format": "raw",
+              "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>${groupId}</groupId>\n        <artifactId>${artifactId}</artifactId>\n        <version>${version}</version>\n    </parent>\n\n    <artifactId>${artifactId}-domain</artifactId>\n\n    <dependencies>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-share</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>io.github.netcorepal</groupId>\n            <artifactId>cap4j-ddd-starter</artifactId>\n            <version>${cap4j.version}</version>\n        </dependency>\n        <!-- JPA -->\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\n        </dependency>\n    </dependencies>\n\n</project>"
+            },
+            {
               "type": "dir",
-              "name": "main",
+              "name": "src",
               "children": [
                 {
                   "type": "dir",
-                  "name": "java",
+                  "name": "main",
                   "children": [
                     {
                       "type": "dir",
-                      "name": "${basePackage}",
+                      "name": "java",
                       "children": [
                         {
                           "type": "dir",
-                          "name": "domain",
+                          "name": "${basePackage}",
+                          "children": [
+                            {
+                              "type": "dir",
+                              "name": "domain",
+                              "children": [
+                                {
+                                  "type": "dir",
+                                  "name": "_share"
+                                },
+                                {
+                                  "type": "dir",
+                                  "name": "aggregates",
+                                  "tag": "aggregate,domain_event,factory,specification"
+                                },
+                                {
+                                  "type": "dir",
+                                  "name": "services",
+                                  "tag": "domain_service"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "dir",
+                      "name": "resources",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "dir",
+                  "name": "test",
+                  "children": [
+                    {
+                      "type": "dir",
+                      "name": "java"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "dir",
+          "name": "${artifactId}-share",
+          "children": [
+            {
+              "type": "file",
+              "name": "pom.xml",
+              "format": "raw",
+              "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>${groupId}</groupId>\n        <artifactId>${artifactId}</artifactId>\n        <version>${version}</version>\n    </parent>\n\n    <artifactId>${artifactId}-share</artifactId>\n\n    <dependencies>\n        <!-- 常用工具类 -->\n        <dependency>\n            <groupId>org.apache.commons</groupId>\n            <artifactId>commons-lang3</artifactId>\n            <version>${commons.lang3.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>org.apache.commons</groupId>\n            <artifactId>commons-collections4</artifactId>\n            <version>${commons.collections4.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>com.google.guava</groupId>\n            <artifactId>guava</artifactId>\n            <version>${guava.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>com.alibaba</groupId>\n            <artifactId>fastjson</artifactId>\n            <version>${fastjson.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>com.only4</groupId>\n            <artifactId>only4-redis</artifactId>\n        </dependency>\n    </dependencies>\n\n</project>"
+            },
+            {
+              "type": "dir",
+              "name": "src",
+              "children": [
+                {
+                  "type": "dir",
+                  "name": "main",
+                  "children": [
+                    {
+                      "type": "dir",
+                      "name": "java",
+                      "children": [
+                        {
+                          "type": "dir",
+                          "name": "${basePackage}",
                           "children": [
                             {
                               "type": "dir",
                               "name": "_share"
-                            },
-                            {
-                              "type": "dir",
-                              "name": "aggregates",
-                              "tag": "aggregate,domain_event,factory,specification"
-                            },
-                            {
-                              "type": "dir",
-                              "name": "services",
-                              "tag": "domain_service"
                             }
                           ]
                         }
                       ]
+                    },
+                    {
+                      "type": "dir",
+                      "name": "resources",
+                      "children": []
                     }
                   ]
                 },
                 {
                   "type": "dir",
-                  "name": "resources",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "type": "dir",
-              "name": "test",
-              "children": [
-                {
-                  "type": "dir",
-                  "name": "java"
+                  "name": "test",
+                  "children": [
+                    {
+                      "type": "dir",
+                      "name": "java"
+                    }
+                  ]
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "type": "dir",
-      "name": "${artifactId}-share",
-      "children": [
-        {
-          "type": "file",
-          "name": "pom.xml",
-          "format": "raw",
-          "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>${groupId}</groupId>\n        <artifactId>${artifactId}</artifactId>\n        <version>${version}</version>\n    </parent>\n\n    <artifactId>${artifactId}-share</artifactId>\n\n    <dependencies>\n        <!-- 常用工具类 -->\n        <dependency>\n            <groupId>org.apache.commons</groupId>\n            <artifactId>commons-lang3</artifactId>\n            <version>${commons.lang3.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>org.apache.commons</groupId>\n            <artifactId>commons-collections4</artifactId>\n            <version>${commons.collections4.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>com.google.guava</groupId>\n            <artifactId>guava</artifactId>\n            <version>${guava.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>com.alibaba</groupId>\n            <artifactId>fastjson</artifactId>\n            <version>${fastjson.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>com.only4</groupId>\n            <artifactId>only4-redis</artifactId>\n        </dependency>\n    </dependencies>\n\n</project>"
         },
         {
           "type": "dir",
-          "name": "src",
+          "name": "${artifactId}-start",
           "children": [
             {
+              "type": "file",
+              "name": "pom.xml",
+              "format": "raw",
+              "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>${groupId}</groupId>\n        <artifactId>${artifactId}</artifactId>\n        <version>${version}</version>\n    </parent>\n\n    <artifactId>${artifactId}-start</artifactId>\n\n    <dependencies>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-share</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-adapter</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n\n        <dependency>\n            <groupId>net.logstash.logback</groupId>\n            <artifactId>logstash-logback-encoder</artifactId>\n            <version>6.6</version>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>${project.artifactId}</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n                <version>2.6.3</version>\n                <configuration>\n                </configuration>\n                <executions>\n                    <execution>\n                        <id>repackage</id>\n                        <goals>\n                            <goal>repackage</goal>\n                        </goals>\n                        <configuration>\n                            <mainClass>${groupId}.ddd.multi.StartApplication</mainClass>\n                            <outputDirectory>${project.basedir}/../target</outputDirectory>\n                        </configuration>\n                    </execution>\n                </executions>\n            </plugin>\n        </plugins>\n    </build>\n</project>"
+            },
+            {
               "type": "dir",
-              "name": "main",
+              "name": "src",
               "children": [
                 {
                   "type": "dir",
-                  "name": "java",
+                  "name": "main",
                   "children": [
                     {
                       "type": "dir",
-                      "name": "${basePackage}",
+                      "name": "java",
                       "children": [
                         {
                           "type": "dir",
-                          "name": "_share"
+                          "name": "${basePackage}",
+                          "children": [
+                            {
+                              "type": "file",
+                              "name": "StartApplication.java",
+                              "format": "raw",
+                              "data": "package ${basePackage};\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.boot.autoconfigure.domain.EntityScan;\nimport org.springframework.cloud.openfeign.EnableFeignClients;\nimport org.springframework.data.jpa.repository.config.EnableJpaRepositories;\nimport org.springframework.scheduling.annotation.EnableScheduling;\n\n/**\n * @author cap4j-ddd-codegen\n */\n@SpringBootApplication\n@EnableFeignClients\n@EnableScheduling\n@EnableJpaRepositories(basePackages = \"${basePackage}.adapter.domain.repositories\")\n@EntityScan(basePackages = \"${basePackage}.domain.aggregates\")\npublic class StartApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(StartApplication.class, args);\n    }\n\n}"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "dir",
+                      "name": "resources",
+                      "children": [
+                        {
+                          "type": "file",
+                          "name": "application.yml",
+                          "format": "raw",
+                          "data": "spring:\n  application:\n    name: ${artifactId}\n    version: 1.2.3\n  servlet:\n    multipart:\n      max-request-size: 50MB\n      max-file-size: 50MB\n  jackson:\n    date-format: yyyy-MM-dd HH:mm:ss\n    time-zone: GMT+8\n    default-property-inclusion: non_null\n    serialization:\n      FAIL_ON_EMPTY_BEANS: false\n      INDENT_OUTPUT: false\n    deserialization:\n      FAIL_ON_UNKNOWN_PROPERTIES: false\n  mvc:\n    log-request-details: true\n  cloud:\n    openfeign:\n      okhttp:\n        enabled: false\n  datasource:\n    url: ${connectionString}\n    type: com.alibaba.druid.pool.DruidDataSource\n    username: ${user}\n    password: ${pwd}\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    druid:\n      initial-size: 30\n      max-active: 100\n      min-idle: 30\n      max-wait: 1000\n      use-unfair-lock: true\n      pool-prepared-statements: false\n      validation-query: select 1\n      validation-query-timeout: 2\n      keep-alive: true\n      test-on-borrow: false\n      test-on-return: false\n      test-while-idle: true\n      min-evictable-idle-time-millis: 43200000\n      max-evictable-idle-time-millis: 86400000\n  jpa:\n    open-in-view: true\n    hibernate:\n      ddl-auto: none\n    show-sql: false\n    properties:\n      hibernate:\n        dialect:\n          storage_engine: innodb\n        jdbc:\n          batch_size: 5000\n          batch_versioned_data: true\n    database-platform: org.hibernate.dialect.MySQLDialect\n\n  data:\n    redis:\n      host: localhost\n      port: 6379\n      password: 123456\n      database: 12\n      timeout: 5000ms\n      ssl:\n        enabled: false\n\nlogging:\n  level:\n    sql: DEBUG\n    org.hibernate.orm.jdbc.bind: TRACE\n\nserver:\n  port: 8081\n  tomcat:\n    uri-encoding: UTF-8\n    threads:\n      max: 400\n  servlet:\n    context-path: /${artifactId}\n\n\nmanagement:\n  endpoint:\n    shutdown:\n      enabled: true\n  endpoints:\n    web:\n      exposure:\n        include: health,info,prometheus,metrics,shutdown\n  metrics:\n    tags:\n      application: ${spring.application.name}\n  health:\n    redis:\n      enabled: false\n\nspringdoc:\n  api-docs:\n    # 是否开启接口文档\n    enabled: true\n    resolve-schema-properties: true\n  #  swagger-ui:\n  #    # 持久化认证数据\n  #    persistAuthorization: true\n  info:\n    # 标题\n    title: '标题：${spring.application.name}_接口文档'\n    # 描述\n    description: '描述...,具体包括XXX,XXX模块...'\n    # 版本\n    version: '版本号: ${spring.application.version}'\n    # 作者信息\n    contact:\n      name: XXX\n      email: XXX@163.com\n      url: XXX\n  components:\n    # 鉴权方式配置\n    security-schemes:\n      apiKey:\n        type: APIKEY\n        in: HEADER\n        name: ${sa-token.token-name}\n\nmybatis:\n  mapper-locations: classpath:mapper/*.xml\n  configuration:\n    map-underscore-to-camel-case: true\n    default-enum-type-handler: ${basePackage}.adapter.infra.mybatis._share.MyEnumTypeHandler\n\nrocketmq:\n  name-server: localhost:9876\n  producer:\n    group: ${spring.application.name}\n\nredisson:\n  key-prefix:\n  threads: 4\n  nettyThreads: 8\n  single-server-config:\n    client-name: ${spring.application.name}\n    connection-minimum-idle-size: 8\n    connection-pool-size: 32\n    idle-connection-timeout: 10000\n    timeout: 3000\n    subscription-connection-pool-size: 50\n\nsecurity:\n  excludes:\n  - /*.html\n  - /**/*.html\n  - /**/*.css\n  - /**/*.js\n  - /favicon.ico\n  - /error/*/api-docs\n  - /*/api-docs/**\n  - /*/swagger-ui/*\n  - /*/cap4j/*\n\nsa-token:\n  token-name: Authorization\n  is-concurrent: true\n  is-share: false\n  jwt-secret-key: abcdefghijklmnopqrstuvwxyz\n\ncap4j:\n  ddd:\n    archinfo:\n      enabled: true\n      base-package: ${basePackage}\n    distributed:\n      idgenerator:\n        snowflake:\n          enable: true\n    domain:\n      event:\n        event-scan-package: ${basePackage}\n        schedule:\n          add-partition-enable: false\n    application:\n      saga:\n        schedule:\n          add-partition-enable: false"
+                        },
+                        {
+                          "type": "file",
+                          "name": "logback.xml",
+                          "format": "raw",
+                          "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<configuration debug=\"false\" scan=\"false\" scanPeriod=\"60 seconds\">\n    <property resource=\"application.yml\"/>\n\n    <conversionRule conversionWord=\"clr\"\n                    converterClass=\"org.springframework.boot.logging.logback.ColorConverter\"/>\n    <conversionRule conversionWord=\"wex\"\n                    converterClass=\"org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter\"/>\n    <conversionRule conversionWord=\"wEx\"\n                    converterClass=\"org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter\"/>\n    <property name=\"CONSOLE_LOG_PATTERN\"\n              value=\"${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){bright_yellow} %clr(traceId:[%X{traceId}]){bright_green} %clr(%-5level){bright_blue} %clr(${PID:- }){bright_magenta} %clr(---){faint} %clr([%15.15t]){bright_red} %n%clr(%-40.40logger{39}){bright_black} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}\"/>\n\n    <!-- 控制台JSON输出 -->\n    <!--\n    将下面依赖添加到项目中\n    <dependency>\n        <groupId>net.logstash.logback</groupId>\n        <artifactId>logstash-logback-encoder</artifactId>\n        <version>6.6</version>\n    </dependency>\n    -->\n    <appender name=\"JsonConsole\" class=\"ch.qos.logback.core.ConsoleAppender\">\n        <encoder charset=\"UTF-8\" class=\"net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder\">\n            <providers>\n                <pattern>\n                    <pattern>\n                        {\n                        \"time\": \"%d{yyyy-MM-dd HH:mm:ss.SSS}\",\n                        \"level\": \"%level\",\n                        \"thread\": \"%thread\",\n                        \"logger\": \"%logger\",\n                        \"file\": \"%file %L\",\n                        \"traceId\": \"%X{traceId}\",\n                        \"sourceApp\": \"%X{sourceApp}\",\n                        \"content\": \"%msg\",\n                        \"stackTrace\":\"%wEx\"\n                        }\n                    </pattern>\n                </pattern>\n            </providers>\n        </encoder>\n    </appender>\n    <!-- 控制台输出 -->\n    <appender name=\"CONSOLE\" class=\"ch.qos.logback.core.ConsoleAppender\">\n        <encoder>\n            <pattern>${CONSOLE_LOG_PATTERN}</pattern>\n            <charset>UTF-8</charset>\n        </encoder>\n    </appender>\n\n    <!-- 日志数据级别 -->\n    <root level=\"INFO\">\n        <appender-ref ref=\"CONSOLE\"/>\n    </root>\n\n</configuration>\n"
                         }
                       ]
                     }
@@ -692,113 +851,36 @@
                 },
                 {
                   "type": "dir",
-                  "name": "resources",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "type": "dir",
-              "name": "test",
-              "children": [
-                {
-                  "type": "dir",
-                  "name": "java"
+                  "name": "test",
+                  "children": [
+                    {
+                      "type": "dir",
+                      "name": "java"
+                    }
+                  ]
                 }
               ]
             }
           ]
-        }
-      ]
-    },
-    {
-      "type": "dir",
-      "name": "${artifactId}-start",
-      "children": [
+        },
+        {
+          "type": "file",
+          "name": "ddl.sql",
+          "format": "raw",
+          "data": "-- Create syntax for TABLE '__event'\nCREATE TABLE `__event` (\n                           `id` bigint(20) NOT NULL AUTO_INCREMENT,\n                           `event_uuid` varchar(64) NOT NULL DEFAULT '' COMMENT '事件uuid',\n                           `svc_name` varchar(255) NOT NULL DEFAULT '' COMMENT '服务',\n                           `event_type` varchar(255) NOT NULL DEFAULT '' COMMENT '事件类型',\n                           `data` text COMMENT '事件数据',\n                           `data_type` varchar(255) NOT NULL DEFAULT '' COMMENT '事件数据类型',\n                           `exception` text COMMENT '事件发送异常',\n                           `expire_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '过期时间',\n                           `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                           `event_state` int(11) NOT NULL DEFAULT '0' COMMENT '分发状态',\n                           `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                           `next_try_time` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '下次尝试时间',\n                           `tried_times` int(11) NOT NULL DEFAULT '0' COMMENT '已尝试次数',\n                           `try_times` int(11) NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                           `version` int(11) NOT NULL DEFAULT '0',\n                           `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                           `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                           PRIMARY KEY (`id`\n#   , `db_created_at`\n                               ),\n                           KEY `idx_db_created_at` (`db_created_at`),\n                           KEY `idx_db_updated_at` (`db_updated_at`),\n                           KEY `idx_event_uuid` (`event_uuid`),\n                           KEY `idx_event_type` (`event_type`,`svc_name`),\n                           KEY `idx_create_at` (`create_at`),\n                           KEY `idx_expire_at` (`expire_at`),\n                           KEY `idx_next_try_time` (`next_try_time`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='事件发件箱 support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n-- Create syntax for TABLE '__achrived_event'\nCREATE TABLE `__achrived_event` (\n                           `id` bigint(20) NOT NULL AUTO_INCREMENT,\n                           `event_uuid` varchar(64) NOT NULL DEFAULT '' COMMENT '事件uuid',\n                           `svc_name` varchar(255) NOT NULL DEFAULT '' COMMENT '服务',\n                           `event_type` varchar(255) NOT NULL DEFAULT '' COMMENT '事件类型',\n                           `data` text COMMENT '事件数据',\n                           `data_type` varchar(255) NOT NULL DEFAULT '' COMMENT '事件数据类型',\n                           `exception` text COMMENT '事件发送异常',\n                           `expire_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '过期时间',\n                           `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                           `event_state` int(11) NOT NULL DEFAULT '0' COMMENT '分发状态',\n                           `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                           `next_try_time` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '下次尝试时间',\n                           `tried_times` int(11) NOT NULL DEFAULT '0' COMMENT '已尝试次数',\n                           `try_times` int(11) NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                           `version` int(11) NOT NULL DEFAULT '0',\n                           `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                           `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                           PRIMARY KEY (`id`\n#   , `db_created_at`\n                               ),\n                           KEY `idx_db_created_at` (`db_created_at`),\n                           KEY `idx_db_updated_at` (`db_updated_at`),\n                           KEY `idx_event_uuid` (`event_uuid`),\n                           KEY `idx_event_type` (`event_type`,`svc_name`),\n                           KEY `idx_create_at` (`create_at`),\n                           KEY `idx_expire_at` (`expire_at`),\n                           KEY `idx_next_try_time` (`next_try_time`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='事件发件箱存档 support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n\n-- Create syntax for TABLE '__saga'\nCREATE TABLE `__saga` (\n                          `id` bigint NOT NULL AUTO_INCREMENT,\n                          `saga_uuid` varchar(64) NOT NULL DEFAULT '' COMMENT 'SAGA uuid',\n                          `svc_name` varchar(255) NOT NULL DEFAULT '' COMMENT '服务',\n                          `saga_type` varchar(255) NOT NULL DEFAULT '' COMMENT 'SAGA类型',\n                          `param` text COMMENT '参数',\n                          `param_type` varchar(255) NOT NULL DEFAULT '' COMMENT '参数类型',\n                          `result` text COMMENT '结果',\n                          `result_type` varchar(255) NOT NULL DEFAULT '' COMMENT '结果类型',\n                          `exception` text COMMENT '执行异常',\n                          `expire_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '过期时间',\n                          `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `saga_state` int NOT NULL DEFAULT '0' COMMENT '执行状态@E=0:INIT:init|-1:EXECUTING:executing|-2:CANCEL:cancel|-3:EXPIRED:expired|-4:EXHAUSTED:exhausted|-9:EXCEPTION:exception|1:EXECUTED:executed;@T=SagaState;',\n                          `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                          `next_try_time` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '下次尝试时间',\n                          `tried_times` int(11) NOT NULL DEFAULT '0' COMMENT '已尝试次数',\n                          `try_times` int(11) NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                          `version` int NOT NULL DEFAULT '0',\n                          `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                          PRIMARY KEY (`id`\n#   , `db_created_at`\n                              ),\n                          KEY `idx_db_created_at` (`db_created_at`),\n                          KEY `idx_db_updated_at` (`db_updated_at`),\n                          KEY `idx_saga_uuid` (`saga_uuid`),\n                          KEY `idx_saga_type` (`saga_type`,`svc_name`),\n                          KEY `idx_create_at` (`create_at`),\n                          KEY `idx_expire_at` (`expire_at`),\n                          KEY `idx_next_try_time` (`next_try_time`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='SAGA事务 support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n\n-- Create syntax for TABLE '__saga_process'\nCREATE TABLE `__saga_process` (\n                          `id` bigint NOT NULL AUTO_INCREMENT,\n                          `saga_id` bigint NOT NULL DEFAULT '0',\n                          `process_code` varchar(255) NOT NULL DEFAULT '' COMMENT 'SAGA处理环节代码',\n                          `param` text COMMENT '参数',\n                          `param_type` varchar(255) NOT NULL DEFAULT '' COMMENT '参数类型',\n                          `result` text COMMENT '结果',\n                          `result_type` varchar(255) NOT NULL DEFAULT '' COMMENT '结果类型',\n                          `exception` text COMMENT '执行异常',\n                          `process_state` int NOT NULL DEFAULT '0' COMMENT '执行状态@E=0:INIT:init|-1:EXECUTING:executing|-9:EXCEPTION:exception|1:EXECUTED:executed;@T=SagaProcessState;',\n                          `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                          `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                          `tried_times` int NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                          `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                          PRIMARY KEY (`id`\n#   , `db_created_at`\n                              ),\n                          KEY `idx_db_created_at` (`db_created_at`),\n                          KEY `idx_db_updated_at` (`db_updated_at`),\n                          KEY `idx_saga_id` (`saga_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='SAGA事务-子环节 support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n\n-- Create syntax for TABLE '__archived_saga'\nCREATE TABLE `__archived_saga` (\n                          `id` bigint NOT NULL AUTO_INCREMENT,\n                          `saga_uuid` varchar(64) NOT NULL DEFAULT '' COMMENT 'SAGA uuid',\n                          `svc_name` varchar(255) NOT NULL DEFAULT '' COMMENT '服务',\n                          `saga_type` varchar(255) NOT NULL DEFAULT '' COMMENT 'SAGA类型',\n                          `param` text COMMENT '参数',\n                          `param_type` varchar(255) NOT NULL DEFAULT '' COMMENT '参数类型',\n                          `result` text COMMENT '结果',\n                          `result_type` varchar(255) NOT NULL DEFAULT '' COMMENT '结果类型',\n                          `exception` text COMMENT '执行异常',\n                          `expire_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '过期时间',\n                          `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `saga_state` int NOT NULL DEFAULT '0' COMMENT '执行状态@E=0:INIT:init|-1:EXECUTING:executing|-2:CANCEL:cancel|-3:EXPIRED:expired|-4:EXHAUSTED:exhausted|-9:EXCEPTION:exception|1:EXECUTED:executed;@T=SagaState;',\n                          `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                          `next_try_time` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '下次尝试时间',\n                          `tried_times` int(11) NOT NULL DEFAULT '0' COMMENT '已尝试次数',\n                          `try_times` int(11) NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                          `version` int NOT NULL DEFAULT '0',\n                          `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                          PRIMARY KEY (`id`\n#   , `db_created_at`\n                              ),\n                          KEY `idx_db_created_at` (`db_created_at`),\n                          KEY `idx_db_updated_at` (`db_updated_at`),\n                          KEY `idx_saga_uuid` (`saga_uuid`),\n                          KEY `idx_saga_type` (`saga_type`,`svc_name`),\n                          KEY `idx_create_at` (`create_at`),\n                          KEY `idx_expire_at` (`expire_at`),\n                          KEY `idx_next_try_time` (`next_try_time`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='SAGA事务(存档) support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n\n-- Create syntax for TABLE '__archived_saga_process'\nCREATE TABLE `__archived_saga_process` (\n                          `id` bigint NOT NULL AUTO_INCREMENT,\n                          `saga_id` bigint NOT NULL DEFAULT '0',\n                          `process_code` varchar(255) NOT NULL DEFAULT '' COMMENT 'SAGA处理环节代码',\n                          `param` text COMMENT '参数',\n                          `param_type` varchar(255) NOT NULL DEFAULT '' COMMENT '参数类型',\n                          `result` text COMMENT '结果',\n                          `result_type` varchar(255) NOT NULL DEFAULT '' COMMENT '结果类型',\n                          `exception` text COMMENT '执行异常',\n                          `process_state` int NOT NULL DEFAULT '0' COMMENT '执行状态@E=0:INIT:init|-1:EXECUTING:executing|-9:EXCEPTION:exception|1:EXECUTED:executed;@T=SagaProcessState;',\n                          `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                          `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                          `tried_times` int NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                          `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                          PRIMARY KEY (`id`\n#   , `db_created_at`\n                              ),\n                          KEY `idx_db_created_at` (`db_created_at`),\n                          KEY `idx_db_updated_at` (`db_updated_at`),\n                          KEY `idx_saga_id` (`saga_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='SAGA事务-子环节(存档) support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n\nCREATE TABLE `__locker` (\n                          `id` int(11) unsigned NOT NULL AUTO_INCREMENT,\n                          `name` varchar(100) NOT NULL DEFAULT '' COMMENT '锁名称',\n                          `pwd` varchar(100) NOT NULL DEFAULT '' COMMENT '锁密码',\n                          `lock_at` datetime NOT NULL DEFAULT '1970-01-01 00:00:00' COMMENT '锁获取时间',\n                          `unlock_at` datetime NOT NULL DEFAULT '1970-01-01 00:00:00' COMMENT '锁释放时间',\n                          `version` bigint(20) unsigned NOT NULL DEFAULT '0',\n                          `db_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `db_updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP  COMMENT '更新时间',\n                          PRIMARY KEY (`id`),\n                          KEY `idx_db_created_at` (`db_created_at`),\n                          KEY `idx_db_updated_at` (`db_updated_at`),\n                          UNIQUE `uniq_name` (`name`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='锁 support by cap4j\n@I;';"
+        },
+        {
+          "type": "file",
+          "name": ".gitignore",
+          "format": "raw",
+          "data": "target/\n!.mvn/wrapper/maven-wrapper.jar\n!**/src/main/**/target/\n!**/src/test/**/target/\n\n### IntelliJ IDEA ###\n.idea/modules.xml\n.idea/jarRepositories.xml\n.idea/compiler.xml\n.idea/libraries/\n*.iws\n*.iml\n*.ipr\n\n### Eclipse ###\n.apt_generated\n.classpath\n.factorypath\n.project\n.settings\n.springBeans\n.sts4-cache\n\n### NetBeans ###\n/nbproject/private/\n/nbbuild/\n/dist/\n/nbdist/\n/.nb-gradle/\nbuild/\n!**/src/main/**/build/\n!**/src/test/**/build/\n\n### VS Code ###\n.vscode/\n\n### Mac OS ###\n.DS_Store"
+        },
         {
           "type": "file",
           "name": "pom.xml",
           "format": "raw",
-          "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>${groupId}</groupId>\n        <artifactId>${artifactId}</artifactId>\n        <version>${version}</version>\n    </parent>\n\n    <artifactId>${artifactId}-start</artifactId>\n\n    <dependencies>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-share</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n        <dependency>\n            <groupId>${groupId}</groupId>\n            <artifactId>${artifactId}-adapter</artifactId>\n            <version>${project.version}</version>\n        </dependency>\n\n        <dependency>\n            <groupId>net.logstash.logback</groupId>\n            <artifactId>logstash-logback-encoder</artifactId>\n            <version>6.6</version>\n        </dependency>\n    </dependencies>\n    <build>\n        <finalName>${project.artifactId}</finalName>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n                <version>2.6.3</version>\n                <configuration>\n                </configuration>\n                <executions>\n                    <execution>\n                        <id>repackage</id>\n                        <goals>\n                            <goal>repackage</goal>\n                        </goals>\n                        <configuration>\n                            <mainClass>${groupId}.ddd.multi.StartApplication</mainClass>\n                            <outputDirectory>${project.basedir}/../target</outputDirectory>\n                        </configuration>\n                    </execution>\n                </executions>\n            </plugin>\n        </plugins>\n    </build>\n</project>"
-        },
-        {
-          "type": "dir",
-          "name": "src",
-          "children": [
-            {
-              "type": "dir",
-              "name": "main",
-              "children": [
-                {
-                  "type": "dir",
-                  "name": "java",
-                  "children": [
-                    {
-                      "type": "dir",
-                      "name": "${basePackage}",
-                      "children": [
-                        {
-                          "type": "file",
-                          "name": "StartApplication.java",
-                          "format": "raw",
-                          "data": "package ${basePackage};\n\nimport org.springframework.boot.SpringApplication;\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\nimport org.springframework.boot.autoconfigure.domain.EntityScan;\nimport org.springframework.cloud.openfeign.EnableFeignClients;\nimport org.springframework.data.jpa.repository.config.EnableJpaRepositories;\nimport org.springframework.scheduling.annotation.EnableScheduling;\n\n/**\n * @author cap4j-ddd-codegen\n */\n@SpringBootApplication\n@EnableFeignClients\n@EnableScheduling\n@EnableJpaRepositories(basePackages = \"${basePackage}.adapter.domain.repositories\")\n@EntityScan(basePackages = \"${basePackage}.domain.aggregates\")\npublic class StartApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(StartApplication.class, args);\n    }\n\n}"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "dir",
-                  "name": "resources",
-                  "children": [
-                    {
-                      "type": "file",
-                      "name": "application.yml",
-                      "format": "raw",
-                      "data": "spring:\n  application:\n    name: ${artifactId}\n    version: 1.2.3\n  servlet:\n    multipart:\n      max-request-size: 50MB\n      max-file-size: 50MB\n  jackson:\n    date-format: yyyy-MM-dd HH:mm:ss\n    time-zone: GMT+8\n    default-property-inclusion: non_null\n    serialization:\n      FAIL_ON_EMPTY_BEANS: false\n      INDENT_OUTPUT: false\n    deserialization:\n      FAIL_ON_UNKNOWN_PROPERTIES: false\n  mvc:\n    log-request-details: true\n  cloud:\n    openfeign:\n      okhttp:\n        enabled: false\n  datasource:\n    url: ${connectionString}\n    type: com.alibaba.druid.pool.DruidDataSource\n    username: ${user}\n    password: ${pwd}\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    druid:\n      initial-size: 30\n      max-active: 100\n      min-idle: 30\n      max-wait: 1000\n      use-unfair-lock: true\n      pool-prepared-statements: false\n      validation-query: select 1\n      validation-query-timeout: 2\n      keep-alive: true\n      test-on-borrow: false\n      test-on-return: false\n      test-while-idle: true\n      min-evictable-idle-time-millis: 43200000\n      max-evictable-idle-time-millis: 86400000\n  jpa:\n    open-in-view: true\n    hibernate:\n      ddl-auto: none\n    show-sql: false\n    properties:\n      hibernate:\n        dialect:\n          storage_engine: innodb\n        jdbc:\n          batch_size: 5000\n          batch_versioned_data: true\n    database-platform: org.hibernate.dialect.MySQLDialect\n\n  data:\n    redis:\n      host: localhost\n      port: 6379\n      password: 123456\n      database: 12\n      timeout: 5000ms\n      ssl:\n        enabled: false\n\nlogging:\n  level:\n    sql: DEBUG\n    org.hibernate.orm.jdbc.bind: TRACE\n\nserver:\n  port: 8081\n  tomcat:\n    uri-encoding: UTF-8\n    threads:\n      max: 400\n  servlet:\n    context-path: /${artifactId}\n\n\nmanagement:\n  endpoint:\n    shutdown:\n      enabled: true\n  endpoints:\n    web:\n      exposure:\n        include: health,info,prometheus,metrics,shutdown\n  metrics:\n    tags:\n      application: ${spring.application.name}\n  health:\n    redis:\n      enabled: false\n\nspringdoc:\n  api-docs:\n    # 是否开启接口文档\n    enabled: true\n    resolve-schema-properties: true\n  #  swagger-ui:\n  #    # 持久化认证数据\n  #    persistAuthorization: true\n  info:\n    # 标题\n    title: '标题：${spring.application.name}_接口文档'\n    # 描述\n    description: '描述...,具体包括XXX,XXX模块...'\n    # 版本\n    version: '版本号: ${spring.application.version}'\n    # 作者信息\n    contact:\n      name: XXX\n      email: XXX@163.com\n      url: XXX\n  components:\n    # 鉴权方式配置\n    security-schemes:\n      apiKey:\n        type: APIKEY\n        in: HEADER\n        name: ${sa-token.token-name}\n\nmybatis:\n  mapper-locations: classpath:mapper/*.xml\n  configuration:\n    map-underscore-to-camel-case: true\n    default-enum-type-handler: ${basePackage}.adapter.infra.mybatis._share.MyEnumTypeHandler\n\nrocketmq:\n  name-server: localhost:9876\n  producer:\n    group: ${spring.application.name}\n\nredisson:\n  key-prefix:\n  threads: 4\n  nettyThreads: 8\n  single-server-config:\n    client-name: ${spring.application.name}\n    connection-minimum-idle-size: 8\n    connection-pool-size: 32\n    idle-connection-timeout: 10000\n    timeout: 3000\n    subscription-connection-pool-size: 50\n\nsecurity:\n  excludes:\n  - /*.html\n  - /**/*.html\n  - /**/*.css\n  - /**/*.js\n  - /favicon.ico\n  - /error/*/api-docs\n  - /*/api-docs/**\n  - /*/swagger-ui/*\n  - /*/cap4j/*\n\nsa-token:\n  token-name: Authorization\n  is-concurrent: true\n  is-share: false\n  jwt-secret-key: abcdefghijklmnopqrstuvwxyz\n\ncap4j:\n  ddd:\n    archinfo:\n      enabled: true\n      base-package: ${basePackage}\n    distributed:\n      idgenerator:\n        snowflake:\n          enable: true\n    domain:\n      event:\n        event-scan-package: ${basePackage}\n        schedule:\n          add-partition-enable: false\n    application:\n      saga:\n        schedule:\n          add-partition-enable: false"
-                    },
-                    {
-                      "type": "file",
-                      "name": "logback.xml",
-                      "format": "raw",
-                      "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<configuration debug=\"false\" scan=\"false\" scanPeriod=\"60 seconds\">\n    <property resource=\"application.yml\"/>\n\n    <conversionRule conversionWord=\"clr\"\n                    converterClass=\"org.springframework.boot.logging.logback.ColorConverter\"/>\n    <conversionRule conversionWord=\"wex\"\n                    converterClass=\"org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter\"/>\n    <conversionRule conversionWord=\"wEx\"\n                    converterClass=\"org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter\"/>\n    <property name=\"CONSOLE_LOG_PATTERN\"\n              value=\"${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){bright_yellow} %clr(traceId:[%X{traceId}]){bright_green} %clr(%-5level){bright_blue} %clr(${PID:- }){bright_magenta} %clr(---){faint} %clr([%15.15t]){bright_red} %n%clr(%-40.40logger{39}){bright_black} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}\"/>\n\n    <!-- 控制台JSON输出 -->\n    <!--\n    将下面依赖添加到项目中\n    <dependency>\n        <groupId>net.logstash.logback</groupId>\n        <artifactId>logstash-logback-encoder</artifactId>\n        <version>6.6</version>\n    </dependency>\n    -->\n    <appender name=\"JsonConsole\" class=\"ch.qos.logback.core.ConsoleAppender\">\n        <encoder charset=\"UTF-8\" class=\"net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder\">\n            <providers>\n                <pattern>\n                    <pattern>\n                        {\n                        \"time\": \"%d{yyyy-MM-dd HH:mm:ss.SSS}\",\n                        \"level\": \"%level\",\n                        \"thread\": \"%thread\",\n                        \"logger\": \"%logger\",\n                        \"file\": \"%file %L\",\n                        \"traceId\": \"%X{traceId}\",\n                        \"sourceApp\": \"%X{sourceApp}\",\n                        \"content\": \"%msg\",\n                        \"stackTrace\":\"%wEx\"\n                        }\n                    </pattern>\n                </pattern>\n            </providers>\n        </encoder>\n    </appender>\n    <!-- 控制台输出 -->\n    <appender name=\"CONSOLE\" class=\"ch.qos.logback.core.ConsoleAppender\">\n        <encoder>\n            <pattern>${CONSOLE_LOG_PATTERN}</pattern>\n            <charset>UTF-8</charset>\n        </encoder>\n    </appender>\n\n    <!-- 日志数据级别 -->\n    <root level=\"INFO\">\n        <appender-ref ref=\"CONSOLE\"/>\n    </root>\n\n</configuration>\n"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "dir",
-              "name": "test",
-              "children": [
-                {
-                  "type": "dir",
-                  "name": "java"
-                }
-              ]
-            }
-          ]
+          "conflict": "overwrite",
+          "data": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <!-- [cap4j-ddd-codegen-maven-plugin:do-not-overwrite] -->\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>${groupId}</groupId>\n    <artifactId>${artifactId}</artifactId>\n    <version>${version}</version>\n    <packaging>pom</packaging>\n\n    <name>${artifactId}</name>\n    <modules>\n        <module>${artifactId}-domain</module>\n        <module>${artifactId}-application</module>\n        <module>${artifactId}-adapter</module>\n        <module>${artifactId}-share</module>\n        <module>${artifactId}-start</module>\n    </modules>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>\n        <java.version>1.8</java.version>\n        <cap4j.version>3.1.0-alpha-1</cap4j.version>\n\n        <org.projectlombok.version>1.18.22</org.projectlombok.version>\n\n        <guava.version>31.1-jre</guava.version>\n        <commons.lang3.version>3.12.0</commons.lang3.version>\n        <commons.collections4.version>4.4</commons.collections4.version>\n        <fastjson.version>1.2.83</fastjson.version>\n\n        <spring-boot.version>3.1.12</spring-boot.version>\n        <spring-cloud.version>2022.0.5</spring-cloud.version>\n\n        <knife4j.version>4.5.0</knife4j.version>\n\n        <mysql-connector.version>5.1.46</mysql-connector.version>\n        <spring-boot-druid.version>1.2.8</spring-boot-druid.version>\n        <mybatis-starter.version>3.0.4</mybatis-starter.version>\n        <apollo.version>2.0.1</apollo.version>\n        <xxljob.version>2.3.1</xxljob.version>\n    </properties>\n\n    <dependencyManagement>\n        <dependencies>\n            <dependency>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-dependencies</artifactId>\n                <version>${spring-boot.version}</version>\n                <type>pom</type>\n                <scope>import</scope>\n            </dependency>\n            <dependency>\n                <groupId>org.springframework.cloud</groupId>\n                <artifactId>spring-cloud-dependencies</artifactId>\n                <version>${spring-cloud.version}</version>\n                <type>pom</type>\n                <scope>import</scope>\n            </dependency>\n            <dependency>\n                <groupId>com.github.xiaoymin</groupId>\n                <artifactId>knife4j-dependencies</artifactId>\n                <version>${knife4j.version}</version>\n                <type>pom</type>\n                <scope>import</scope>\n            </dependency>\n        </dependencies>\n    </dependencyManagement>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.projectlombok</groupId>\n            <artifactId>lombok</artifactId>\n            <optional>true</optional>\n            <version>${org.projectlombok.version}</version>\n        </dependency>\n\n        <dependency>\n            <groupId>io.github.netcorepal</groupId>\n            <artifactId>cap4j-ddd-codegen-maven-plugin</artifactId>\n            <version>${cap4j.version}</version>\n            <scope>provided</scope>\n        </dependency>\n\n        <dependency>\n            <groupId>junit</groupId>\n            <artifactId>junit</artifactId>\n            <version>3.8.1</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>io.github.netcorepal</groupId>\n                <artifactId>cap4j-ddd-codegen-maven-plugin</artifactId>\n                <version>${cap4j.version}</version>\n                ${cap4jPluginConfiguration}\n            </plugin>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-compiler-plugin</artifactId>\n                <version>3.8.1</version>\n                <configuration>\n                    <source>1.8</source>\n                    <target>1.8</target>\n                    <encoding>UTF-8</encoding>\n                </configuration>\n            </plugin>\n        </plugins>\n    </build>\n</project>"
         }
       ]
-    },
-    {
-      "type": "file",
-      "name": "ddl.sql",
-      "format": "raw",
-      "data": "-- Create syntax for TABLE '__event'\nCREATE TABLE `__event` (\n                           `id` bigint(20) NOT NULL AUTO_INCREMENT,\n                           `event_uuid` varchar(64) NOT NULL DEFAULT '' COMMENT '事件uuid',\n                           `svc_name` varchar(255) NOT NULL DEFAULT '' COMMENT '服务',\n                           `event_type` varchar(255) NOT NULL DEFAULT '' COMMENT '事件类型',\n                           `data` text COMMENT '事件数据',\n                           `data_type` varchar(255) NOT NULL DEFAULT '' COMMENT '事件数据类型',\n                           `exception` text COMMENT '事件发送异常',\n                           `expire_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '过期时间',\n                           `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                           `event_state` int(11) NOT NULL DEFAULT '0' COMMENT '分发状态',\n                           `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                           `next_try_time` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '下次尝试时间',\n                           `tried_times` int(11) NOT NULL DEFAULT '0' COMMENT '已尝试次数',\n                           `try_times` int(11) NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                           `version` int(11) NOT NULL DEFAULT '0',\n                           `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                           `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                           PRIMARY KEY (`id`\n#   , `db_created_at`\n                               ),\n                           KEY `idx_db_created_at` (`db_created_at`),\n                           KEY `idx_db_updated_at` (`db_updated_at`),\n                           KEY `idx_event_uuid` (`event_uuid`),\n                           KEY `idx_event_type` (`event_type`,`svc_name`),\n                           KEY `idx_create_at` (`create_at`),\n                           KEY `idx_expire_at` (`expire_at`),\n                           KEY `idx_next_try_time` (`next_try_time`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='事件发件箱 support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n-- Create syntax for TABLE '__achrived_event'\nCREATE TABLE `__achrived_event` (\n                           `id` bigint(20) NOT NULL AUTO_INCREMENT,\n                           `event_uuid` varchar(64) NOT NULL DEFAULT '' COMMENT '事件uuid',\n                           `svc_name` varchar(255) NOT NULL DEFAULT '' COMMENT '服务',\n                           `event_type` varchar(255) NOT NULL DEFAULT '' COMMENT '事件类型',\n                           `data` text COMMENT '事件数据',\n                           `data_type` varchar(255) NOT NULL DEFAULT '' COMMENT '事件数据类型',\n                           `exception` text COMMENT '事件发送异常',\n                           `expire_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '过期时间',\n                           `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                           `event_state` int(11) NOT NULL DEFAULT '0' COMMENT '分发状态',\n                           `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                           `next_try_time` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '下次尝试时间',\n                           `tried_times` int(11) NOT NULL DEFAULT '0' COMMENT '已尝试次数',\n                           `try_times` int(11) NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                           `version` int(11) NOT NULL DEFAULT '0',\n                           `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                           `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                           PRIMARY KEY (`id`\n#   , `db_created_at`\n                               ),\n                           KEY `idx_db_created_at` (`db_created_at`),\n                           KEY `idx_db_updated_at` (`db_updated_at`),\n                           KEY `idx_event_uuid` (`event_uuid`),\n                           KEY `idx_event_type` (`event_type`,`svc_name`),\n                           KEY `idx_create_at` (`create_at`),\n                           KEY `idx_expire_at` (`expire_at`),\n                           KEY `idx_next_try_time` (`next_try_time`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='事件发件箱存档 support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n\n-- Create syntax for TABLE '__saga'\nCREATE TABLE `__saga` (\n                          `id` bigint NOT NULL AUTO_INCREMENT,\n                          `saga_uuid` varchar(64) NOT NULL DEFAULT '' COMMENT 'SAGA uuid',\n                          `svc_name` varchar(255) NOT NULL DEFAULT '' COMMENT '服务',\n                          `saga_type` varchar(255) NOT NULL DEFAULT '' COMMENT 'SAGA类型',\n                          `param` text COMMENT '参数',\n                          `param_type` varchar(255) NOT NULL DEFAULT '' COMMENT '参数类型',\n                          `result` text COMMENT '结果',\n                          `result_type` varchar(255) NOT NULL DEFAULT '' COMMENT '结果类型',\n                          `exception` text COMMENT '执行异常',\n                          `expire_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '过期时间',\n                          `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `saga_state` int NOT NULL DEFAULT '0' COMMENT '执行状态@E=0:INIT:init|-1:EXECUTING:executing|-2:CANCEL:cancel|-3:EXPIRED:expired|-4:EXHAUSTED:exhausted|-9:EXCEPTION:exception|1:EXECUTED:executed;@T=SagaState;',\n                          `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                          `next_try_time` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '下次尝试时间',\n                          `tried_times` int(11) NOT NULL DEFAULT '0' COMMENT '已尝试次数',\n                          `try_times` int(11) NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                          `version` int NOT NULL DEFAULT '0',\n                          `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                          PRIMARY KEY (`id`\n#   , `db_created_at`\n                              ),\n                          KEY `idx_db_created_at` (`db_created_at`),\n                          KEY `idx_db_updated_at` (`db_updated_at`),\n                          KEY `idx_saga_uuid` (`saga_uuid`),\n                          KEY `idx_saga_type` (`saga_type`,`svc_name`),\n                          KEY `idx_create_at` (`create_at`),\n                          KEY `idx_expire_at` (`expire_at`),\n                          KEY `idx_next_try_time` (`next_try_time`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='SAGA事务 support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n\n-- Create syntax for TABLE '__saga_process'\nCREATE TABLE `__saga_process` (\n                          `id` bigint NOT NULL AUTO_INCREMENT,\n                          `saga_id` bigint NOT NULL DEFAULT '0',\n                          `process_code` varchar(255) NOT NULL DEFAULT '' COMMENT 'SAGA处理环节代码',\n                          `param` text COMMENT '参数',\n                          `param_type` varchar(255) NOT NULL DEFAULT '' COMMENT '参数类型',\n                          `result` text COMMENT '结果',\n                          `result_type` varchar(255) NOT NULL DEFAULT '' COMMENT '结果类型',\n                          `exception` text COMMENT '执行异常',\n                          `process_state` int NOT NULL DEFAULT '0' COMMENT '执行状态@E=0:INIT:init|-1:EXECUTING:executing|-9:EXCEPTION:exception|1:EXECUTED:executed;@T=SagaProcessState;',\n                          `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                          `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                          `tried_times` int NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                          `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                          PRIMARY KEY (`id`\n#   , `db_created_at`\n                              ),\n                          KEY `idx_db_created_at` (`db_created_at`),\n                          KEY `idx_db_updated_at` (`db_updated_at`),\n                          KEY `idx_saga_id` (`saga_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='SAGA事务-子环节 support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n\n-- Create syntax for TABLE '__archived_saga'\nCREATE TABLE `__archived_saga` (\n                          `id` bigint NOT NULL AUTO_INCREMENT,\n                          `saga_uuid` varchar(64) NOT NULL DEFAULT '' COMMENT 'SAGA uuid',\n                          `svc_name` varchar(255) NOT NULL DEFAULT '' COMMENT '服务',\n                          `saga_type` varchar(255) NOT NULL DEFAULT '' COMMENT 'SAGA类型',\n                          `param` text COMMENT '参数',\n                          `param_type` varchar(255) NOT NULL DEFAULT '' COMMENT '参数类型',\n                          `result` text COMMENT '结果',\n                          `result_type` varchar(255) NOT NULL DEFAULT '' COMMENT '结果类型',\n                          `exception` text COMMENT '执行异常',\n                          `expire_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '过期时间',\n                          `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `saga_state` int NOT NULL DEFAULT '0' COMMENT '执行状态@E=0:INIT:init|-1:EXECUTING:executing|-2:CANCEL:cancel|-3:EXPIRED:expired|-4:EXHAUSTED:exhausted|-9:EXCEPTION:exception|1:EXECUTED:executed;@T=SagaState;',\n                          `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                          `next_try_time` datetime NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '下次尝试时间',\n                          `tried_times` int(11) NOT NULL DEFAULT '0' COMMENT '已尝试次数',\n                          `try_times` int(11) NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                          `version` int NOT NULL DEFAULT '0',\n                          `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                          PRIMARY KEY (`id`\n#   , `db_created_at`\n                              ),\n                          KEY `idx_db_created_at` (`db_created_at`),\n                          KEY `idx_db_updated_at` (`db_updated_at`),\n                          KEY `idx_saga_uuid` (`saga_uuid`),\n                          KEY `idx_saga_type` (`saga_type`,`svc_name`),\n                          KEY `idx_create_at` (`create_at`),\n                          KEY `idx_expire_at` (`expire_at`),\n                          KEY `idx_next_try_time` (`next_try_time`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='SAGA事务(存档) support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n\n-- Create syntax for TABLE '__archived_saga_process'\nCREATE TABLE `__archived_saga_process` (\n                          `id` bigint NOT NULL AUTO_INCREMENT,\n                          `saga_id` bigint NOT NULL DEFAULT '0',\n                          `process_code` varchar(255) NOT NULL DEFAULT '' COMMENT 'SAGA处理环节代码',\n                          `param` text COMMENT '参数',\n                          `param_type` varchar(255) NOT NULL DEFAULT '' COMMENT '参数类型',\n                          `result` text COMMENT '结果',\n                          `result_type` varchar(255) NOT NULL DEFAULT '' COMMENT '结果类型',\n                          `exception` text COMMENT '执行异常',\n                          `process_state` int NOT NULL DEFAULT '0' COMMENT '执行状态@E=0:INIT:init|-1:EXECUTING:executing|-9:EXCEPTION:exception|1:EXECUTED:executed;@T=SagaProcessState;',\n                          `create_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n                          `last_try_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上次尝试时间',\n                          `tried_times` int NOT NULL DEFAULT '0' COMMENT '尝试次数',\n                          `db_created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `db_updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',\n                          PRIMARY KEY (`id`\n#   , `db_created_at`\n                              ),\n                          KEY `idx_db_created_at` (`db_created_at`),\n                          KEY `idx_db_updated_at` (`db_updated_at`),\n                          KEY `idx_saga_id` (`saga_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='SAGA事务-子环节(存档) support by cap4j\n@I;'\n# partition by range(to_days(db_created_at))\n# (partition p202201 values less than (to_days('2022-02-01')) ENGINE=InnoDB)\n;\n\nCREATE TABLE `__locker` (\n                          `id` int(11) unsigned NOT NULL AUTO_INCREMENT,\n                          `name` varchar(100) NOT NULL DEFAULT '' COMMENT '锁名称',\n                          `pwd` varchar(100) NOT NULL DEFAULT '' COMMENT '锁密码',\n                          `lock_at` datetime NOT NULL DEFAULT '1970-01-01 00:00:00' COMMENT '锁获取时间',\n                          `unlock_at` datetime NOT NULL DEFAULT '1970-01-01 00:00:00' COMMENT '锁释放时间',\n                          `version` bigint(20) unsigned NOT NULL DEFAULT '0',\n                          `db_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n                          `db_updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP  COMMENT '更新时间',\n                          PRIMARY KEY (`id`),\n                          KEY `idx_db_created_at` (`db_created_at`),\n                          KEY `idx_db_updated_at` (`db_updated_at`),\n                          UNIQUE `uniq_name` (`name`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='锁 support by cap4j\n@I;';"
-    },
-    {
-      "type": "file",
-      "name": ".gitignore",
-      "format": "raw",
-      "data": "target/\n!.mvn/wrapper/maven-wrapper.jar\n!**/src/main/**/target/\n!**/src/test/**/target/\n\n### IntelliJ IDEA ###\n.idea/modules.xml\n.idea/jarRepositories.xml\n.idea/compiler.xml\n.idea/libraries/\n*.iws\n*.iml\n*.ipr\n\n### Eclipse ###\n.apt_generated\n.classpath\n.factorypath\n.project\n.settings\n.springBeans\n.sts4-cache\n\n### NetBeans ###\n/nbproject/private/\n/nbbuild/\n/dist/\n/nbdist/\n/.nb-gradle/\nbuild/\n!**/src/main/**/build/\n!**/src/test/**/build/\n\n### VS Code ###\n.vscode/\n\n### Mac OS ###\n.DS_Store"
-    },
-    {
-      "type": "file",
-      "name": "pom.xml",
-      "format": "raw",
-      "conflict": "overwrite",
-      "data": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <!-- [cap4j-ddd-codegen-maven-plugin:do-not-overwrite] -->\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>${groupId}</groupId>\n    <artifactId>${artifactId}</artifactId>\n    <version>${version}</version>\n    <packaging>pom</packaging>\n\n    <name>${artifactId}</name>\n    <modules>\n        <module>${artifactId}-domain</module>\n        <module>${artifactId}-application</module>\n        <module>${artifactId}-adapter</module>\n        <module>${artifactId}-share</module>\n        <module>${artifactId}-start</module>\n    </modules>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>\n        <java.version>1.8</java.version>\n        <cap4j.version>3.1.0-alpha-1</cap4j.version>\n\n        <org.projectlombok.version>1.18.22</org.projectlombok.version>\n\n        <guava.version>31.1-jre</guava.version>\n        <commons.lang3.version>3.12.0</commons.lang3.version>\n        <commons.collections4.version>4.4</commons.collections4.version>\n        <fastjson.version>1.2.83</fastjson.version>\n\n        <spring-boot.version>3.1.12</spring-boot.version>\n        <spring-cloud.version>2022.0.5</spring-cloud.version>\n\n        <knife4j.version>4.5.0</knife4j.version>\n\n        <mysql-connector.version>5.1.46</mysql-connector.version>\n        <spring-boot-druid.version>1.2.8</spring-boot-druid.version>\n        <mybatis-starter.version>3.0.4</mybatis-starter.version>\n        <apollo.version>2.0.1</apollo.version>\n        <xxljob.version>2.3.1</xxljob.version>\n    </properties>\n\n    <dependencyManagement>\n        <dependencies>\n            <dependency>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-dependencies</artifactId>\n                <version>${spring-boot.version}</version>\n                <type>pom</type>\n                <scope>import</scope>\n            </dependency>\n            <dependency>\n                <groupId>org.springframework.cloud</groupId>\n                <artifactId>spring-cloud-dependencies</artifactId>\n                <version>${spring-cloud.version}</version>\n                <type>pom</type>\n                <scope>import</scope>\n            </dependency>\n            <dependency>\n                <groupId>com.github.xiaoymin</groupId>\n                <artifactId>knife4j-dependencies</artifactId>\n                <version>${knife4j.version}</version>\n                <type>pom</type>\n                <scope>import</scope>\n            </dependency>\n        </dependencies>\n    </dependencyManagement>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.projectlombok</groupId>\n            <artifactId>lombok</artifactId>\n            <optional>true</optional>\n            <version>${org.projectlombok.version}</version>\n        </dependency>\n\n        <dependency>\n            <groupId>io.github.netcorepal</groupId>\n            <artifactId>cap4j-ddd-codegen-maven-plugin</artifactId>\n            <version>${cap4j.version}</version>\n            <scope>provided</scope>\n        </dependency>\n\n        <dependency>\n            <groupId>junit</groupId>\n            <artifactId>junit</artifactId>\n            <version>3.8.1</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>io.github.netcorepal</groupId>\n                <artifactId>cap4j-ddd-codegen-maven-plugin</artifactId>\n                <version>${cap4j.version}</version>\n                ${cap4jPluginConfiguration}\n            </plugin>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-compiler-plugin</artifactId>\n                <version>3.8.1</version>\n                <configuration>\n                    <source>1.8</source>\n                    <target>1.8</target>\n                    <encoding>UTF-8</encoding>\n                </configuration>\n            </plugin>\n        </plugins>\n    </build>\n</project>"
     }
-  ]
-}
