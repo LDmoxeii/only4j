@@ -33,7 +33,7 @@
                     <moduleNameSuffix4Domain>-domain</moduleNameSuffix4Domain>
                     <moduleNameSuffix4Application>-application</moduleNameSuffix4Application>
                     <connectionString>
-                        <![CDATA[jdbc:mysql://127.0.0.1:3306/only4-ksp-cap4j?serverTimezone=Asia\Shanghai&useSSL=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]>
+                        <![CDATA[jdbc:mysql://127.0.0.1:3306/only4-ksp-cap4j?serverTimezone=Asia/Shanghai&useSSL=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull]]>
                     </connectionString>
                     <user>root</user>
                     <pwd>123456</pwd>
