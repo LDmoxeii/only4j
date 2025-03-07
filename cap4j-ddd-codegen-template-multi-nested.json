@@ -258,7 +258,7 @@
             },
             {
               "type": "dir",
-              "name": "example",
+              "name": "_example",
               "children": [
                 {
                   "type": "file",
